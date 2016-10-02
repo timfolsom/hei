@@ -2,10 +2,16 @@ Package: hei
 Type: Package
 Title: Calculate Healthy Eating Index (HEI) Scores
 Version: 0.1.0
-Author: c(person("Nagraj", "VP", email = "vpnagraj@virginia.edu", role = c("aut", "cre")),
-	     person("Folsom", "Tim", email = "timothyjfolsom", role = c("aut")))
+Author: c(person("Nagraj", "VP", email = "vpnagraj@virginia.edu", role =
+    c("aut", "cre")), person("Folsom", "Tim", email = "timothyjfolsom", role =
+    c("aut")))
 Maintainer: VP Nagraj <vpnagraj@virginia.edu>
-Description: Calculates HEI scores for NHANES datasets to facilitate analysis of demographic and dietary differences.
+Description: Calculates HEI scores for NHANES datasets to facilitate analysis of
+    demographic and dietary differences.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+    dplyr,
+    nhanesA
+RoxygenNote: 5.0.1
