@@ -1,23 +1,20 @@
 #' retrieve demographic data from NHANES database
 #'
-#' @param x dataset to retrieve
-#' @param strict indicator as to whether or not all variables should be returned
+#' @param year year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010" or "2011/2012"
 #' @return data frame of NHANES demographic database
+#' @export
 
-get_demo <- function(x, strict = TRUE) {
+get_demo <- function(year) {
+
+    yearchoices <- c("D" = "2005/2006", "E"= "2007/2008","F"="2009/2010","G"= "2011/2012")
+
+    try(if(!year %in% yearchoices) stop("must use valid year choice"))
+
+    dbname <- paste0("DEMO_", names(which(yearchoices==year)))
+
+    dat <- nhanesA::nhanes(dbname)
 
     keepers <- c("SEQN", "SDDSRVYR")
+    dat <- dat[,names(dat) %in% keepers]
 
-    dat <- nhanesA::nhanes(x)
-    if(strict) {
-
-        dat <- dat[,names(dat) %in% keepers]
-
-        return(dat)
-
-    } else {
-
-        return(dat)
-
-    }
 }

@@ -4,6 +4,7 @@
 #' @param diet dietary data from NHANES database
 #' @param demograph demographic data from NHANES database
 #' @param agethresh numeric threshold for age of survey participants to be included
+#' @export
 #' @return data frame of combined fped, dietary and demographic data
 
 combo <- function(fped, diet, demograph, agethresh = 2) {

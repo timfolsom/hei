@@ -4,12 +4,12 @@
 \alias{get_diet}
 \title{retrieve dietary data from NHANES database}
 \usage{
-get_diet(x, strict = TRUE)
+get_diet(year, day = "both")
 }
 \arguments{
-\item{x}{dataset to retrieve}
+\item{year}{year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010" or "2011/2012"}
 
-\item{strict}{indicator as to whether or not all variables should be returned}
+\item{day}{identifier for survey day to retrive ... must be one of "first", "second" or "both" (default is set to "both")}
 }
 \value{
 data frame of NHANES dietary database

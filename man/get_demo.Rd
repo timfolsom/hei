@@ -4,12 +4,10 @@
 \alias{get_demo}
 \title{retrieve demographic data from NHANES database}
 \usage{
-get_demo(x, strict = TRUE)
+get_demo(year)
 }
 \arguments{
-\item{x}{dataset to retrieve}
-
-\item{strict}{indicator as to whether or not all variables should be returned}
+\item{year}{year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010" or "2011/2012"}
 }
 \value{
 data frame of NHANES demographic database
