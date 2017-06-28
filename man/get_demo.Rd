@@ -15,4 +15,3 @@ data frame of NHANES demographic database
 \description{
 retrieve demographic data from NHANES database
 }
-

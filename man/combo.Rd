@@ -21,4 +21,3 @@ data frame of combined fped, dietary and demographic data
 \description{
 combine datasets to be used in HEI scoring
 }
-

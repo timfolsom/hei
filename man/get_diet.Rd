@@ -17,4 +17,3 @@ data frame of NHANES dietary database
 \description{
 retrieve dietary data from NHANES database
 }
-

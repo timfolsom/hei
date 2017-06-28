@@ -15,4 +15,3 @@ data frame of dietary values with legumes allocated appropriately
 \description{
 allocate legumes for HEI scoring
 }
-

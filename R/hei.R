@@ -4,7 +4,6 @@
 #' @return data frame of HEI data
 #' @export
 
-
 hei <- function(dat) {
 
     require(magrittr, quietly = TRUE)

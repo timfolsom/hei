@@ -15,4 +15,3 @@ data frame of HEI data
 \description{
 calculates individual HEI scores
 }
-
