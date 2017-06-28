@@ -51,7 +51,7 @@ get_diet <- function(year, day = "both") {
 
         dat <- dat[!is.na(dat$TSFAT),]
 
-        dat <- aggregate(. ~ SEQN, data = dat, FUN = "mean")
+        dat <- stats::aggregate(. ~ SEQN, data = dat, FUN = "mean")
 
     }
 

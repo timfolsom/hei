@@ -13,5 +13,6 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     dplyr,
-    nhanesA
-RoxygenNote: 5.0.1
+    nhanesA,
+    magrittr
+RoxygenNote: 6.0.1
