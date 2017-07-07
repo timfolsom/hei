@@ -1,0 +1,55 @@
+---
+title: "hei Vignette"
+author: "Tim Folsom"
+date: "6/27/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+First we load the hei package and the tidyverse package. tidyverse is not necessary but the ``` %>% ``` pipe from dplyr among other functions will be used in this analysis.
+
+```{r, echo=TRUE}
+library(hei)
+library(tidyverse)
+```
+
+## FPED: retrieving and cleaning data
+
+It helps to start with a dataset from FPED already downloaded. You can get one of your own here: https://www.ars.usda.gov/northeast-area/beltsville-md/beltsville-human-nutrition-research-center/food-surveys-research-group/docs/fped-databases/
+
+```{r}
+FPED_DR1TOT_0910 <- read_csv("data/FPED_DR1TOT_0910.csv")
+FPED_DR2TOT_0910 <- read_csv("data/FPED_DR2TOT_0910.csv")
+```
+
+```{r, echo=TRUE, message=TRUE}
+head(FPED_DR1TOT_0910)
+```
+
+We'll be using data for both days.
+For each, filter based on reliable dietary recall status and remove day specific prefixes from column headers.
+
+```{r, echo=TRUE}
+FPED_DR1TOT_0910 <- filter(FPED_DR1TOT_0910, DR1DRSTZ == 1)
+names(FPED_DR1TOT_0910) <- gsub("^DR1", "", names(FPED_DR1TOT_0910))
+
+FPED_DR2TOT_0910 <- filter(FPED_DR2TOT_0910, DR2DRSTZ == 1)
+names(FPED_DR2TOT_0910) <- gsub("^DR2", "", names(FPED_DR2TOT_0910))
+```
+
+Combine the two days' worth of data. Filter based on participant IDs present in both data sets. Filter out observations for which the number of foods reported is missing. Finally, average the data from the two days for each study participant.
+
+```{r, echo=TRUE}
+FPED_BOTH_0910 <- 
+  rbind(FPED_DR1TOT_0910, FPED_DR2TOT_0910[,1:51]) %>%
+  filter(SEQN %in% FPED_DR1TOT_0910$SEQN & SEQN %in% FPED_DR2TOT_0910$SEQN) %>%
+  filter(!is.na(TNUMF)) %>%
+  group_by(SEQN) %>% summarise_all(funs(mean))
+```
+
+```{r, echo=TRUE, message=TRUE}
+head(FPED_BOTH_0910)
+```
