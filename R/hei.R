@@ -6,106 +6,125 @@
 
 hei <- function(dat) {
 
-    require(magrittr, quietly = TRUE)
-    dat %>%
-        # heiveg
-        # total veggies
-        dplyr::mutate(
-            vegden = lvtotal / (TKCAL/1000),
-            heiveg = 5*(vegden/1.1),
-            heiveg = ifelse(heiveg > 5, 5, heiveg)
-        ) %>%
-        # heibngrn
-        # beans and greens
-        dplyr::mutate(
-            bngrden = lbeangrn / (TKCAL/1000),
-            heibngrn = 5*(bngrden/0.2),
-            heibngrn  = ifelse(heibngrn  > 5, 5, heibngrn)
-        ) %>%
-        # heitotfr
-        # total fruit
-        dplyr::mutate(
-            frtden = T_F_TOTAL/(TKCAL/1000),
-            heitotfrt = 5*(frtden/0.8),
-            heitotfrt = ifelse(heitotfrt > 5, 5, heitotfrt)
-        ) %>%
-        # heiwholefrt
-        # whole fruit
-        dplyr::mutate(
-            wholefrtden = WHOLEFRT/(TKCAL/1000),
-            heiwholefrt = 5*(wholefrtden/0.4),
-            heiwholefrt = ifelse(heiwholefrt > 5, 5, heiwholefrt)
-        ) %>%
-        # heiwholegrain
-        # whole grain
-        dplyr::mutate(
-            wholegrainden = T_G_WHOLE/(TKCAL/1000),
-            heiwholegrain = 10*(wholegrainden/1.5),
-            heiwholegrain = ifelse(heiwholegrain > 10, 10, heiwholegrain)
-        ) %>%
-        # heidairy
-        # dairy
-        dplyr::mutate(
-            dairyden = T_D_TOTAL/(TKCAL/1000),
-            heidairy = 10*(dairyden/1.3),
-            heidairy = ifelse(heidairy > 10, 10, heidairy)
-        ) %>%
-        # heitotpro
-        # total protein
-        dplyr::mutate(
-            totproden = lallmeat/(TKCAL/1000),
-            heitotpro = 5*(totproden/2.5),
-            heitotpro = ifelse(heitotpro > 5, 5, heitotpro)
-        ) %>%
-        # heiseaplantpro
-        # seaplant protein
-        dplyr::mutate(
-            seaplantden = lseaplant/(TKCAL/1000),
-            heiseaplantpro = 5*(seaplantden/0.8),
-            heiseaplantpro = ifelse(heiseaplantpro > 5, 5, heiseaplantpro)
-        ) %>%
-        # heifattyacid
-        # fatty acid
-        dplyr::mutate(
-            faratio = ifelse(TSFAT > 0, MONOPOLY / TSFAT, 0),
-            heifattyacid = ifelse(TSFAT == 0 & MONOPOLY == 0, 10, NA),
-            heifattyacid = ifelse(TSFAT == 0 & MONOPOLY > 0, 10, heifattyacid),
-            heifattyacid = ifelse(faratio >= 2.5, 10, heifattyacid),
-            heifattyacid = ifelse(faratio <= 1.2, 0, heifattyacid),
-            heifattyacid = ifelse(is.na(heifattyacid), 10*((faratio-1.2)/(2.5-1.2)), heifattyacid)
-        ) %>%
-        # heisodi
-        # sodium
-        dplyr::mutate(
-            sodden = TSODI / TKCAL,
-            heisodi = ifelse(sodden <= 1.1, 10, NA),
-            heisodi = ifelse(sodden >= 2.0, 0, heisodi),
-            heisodi = ifelse(is.na(heisodi), 10 - (10*(sodden - 1.1)/(2.0-1.1)), heisodi)
-        ) %>%
-        # heirefgrain
-        # refined grain
-        dplyr::mutate(
-            refgrainnden = T_G_WHOLE / (TKCAL/1000),
-            heirefgrain = ifelse(refgrainnden <= 1.8, 10, NA),
-            heirefgrain = ifelse(refgrainnden >= 4.3, 0, heirefgrain),
-            heirefgrain = ifelse(is.na(heirefgrain), 10 - (10*(refgrainnden - 1.8)/(4.3-1.8)), heirefgrain)
-        ) %>%
-        # heirefgrain
-        # refined grain
-        dplyr::mutate(
-            refgrainnden = T_G_REFINED / (TKCAL/1000),
-            heirefgrain = ifelse(refgrainnden <= 1.8, 10, NA),
-            heirefgrain = ifelse(refgrainnden >= 4.3, 0, heirefgrain),
-            heirefgrain = ifelse(is.na(heirefgrain), 10 - (10*(refgrainnden - 1.8)/(4.3-1.8)), heirefgrain)
-        ) %>%
-        # heisofaas
-        # ????
-        dplyr::mutate(
-            sofa_perc = 100* (EMPTYCAL10/TKCAL),
-            heisofaas = ifelse(sofa_perc >= 50, 0, NA),
-            heisofaas = ifelse(sofa_perc <= 19, 20, heisofaas),
-            heisofaas = ifelse(is.na(heisofaas), 20 - (20*(sofa_perc-19)/(50-19)), heisofaas)
-        ) %>%
-        dplyr::mutate(heitotal = heiveg + heibngrn + heitotfrt + heiwholefrt + heiwholegrain + heidairy + heitotpro + heiseaplantpro + heifattyacid + heirefgrain + heisofaas + heisodi)
+    # heiveg
+    # total veggies
+    dat$vegden <- dat$lvtotal / (dat$TKCAL/1000)
+    dat$heiveg <- 5*(dat$vegden/1.1)
+    dat$heiveg <- ifelse(dat$heiveg > 5, 5, dat$heiveg)
+
+    # heibngrn
+    # beans and greens
+    dat$bngrden <- dat$lbeangrn / (dat$TKCAL/1000)
+    dat$heibngrn <- 5*(dat$bngrden/0.2)
+    dat$heibngrn  <- ifelse(dat$heibngrn  > 5, 5, dat$heibngrn)
+
+    # heitotfr
+    # total fruit
+    dat$frtden <- dat$T_F_TOTAL/(dat$TKCAL/1000)
+    dat$heitotfrt <- 5*(dat$frtden/0.8)
+    dat$heitotfrt <- ifelse(dat$heitotfrt > 5, 5, dat$heitotfrt)
+
+    # heiwholefrt
+    # whole fruit
+    dat$wholefrtden <- dat$WHOLEFRT/(dat$TKCAL/1000)
+    dat$heiwholefrt <- 5*(dat$wholefrtden/0.4)
+    dat$heiwholefrt <- ifelse(dat$heiwholefrt > 5, 5, dat$heiwholefrt)
+
+    # heiwholegrain
+    # whole grain
+    dat$wholegrainden <- dat$T_G_WHOLE/(dat$TKCAL/1000)
+    dat$heiwholegrain <- 10*(dat$wholegrainden/1.5)
+    dat$heiwholegrain <- ifelse(dat$heiwholegrain > 10, 10, dat$heiwholegrain)
+
+    # heidairy
+    # dairy
+    dat$dairyden <- dat$T_D_TOTAL/(dat$TKCAL/1000)
+    dat$heidairy <- 10*(dat$dairyden/1.3)
+    dat$heidairy <- ifelse(dat$heidairy > 10, 10, dat$heidairy)
+
+    # heitotpro
+    # total protein
+    dat$totproden <- dat$lallmeat/(dat$TKCAL/1000)
+    dat$heitotpro <- 5*(dat$totproden/2.5)
+    dat$heitotpro <- ifelse(dat$heitotpro > 5, 5, dat$heitotpro)
+
+    # heiseaplantpro
+    # seaplant protein
+    dat$seaplantden <- dat$lseaplant/(dat$TKCAL/1000)
+    dat$heiseaplantpro <- 5*(dat$seaplantden/0.8)
+    dat$heiseaplantpro <- ifelse(dat$heiseaplantpro > 5, 5, dat$heiseaplantpro)
+
+    # heifattyacid
+    # fatty acid
+    dat$faratio <- ifelse(dat$TSFAT > 0,
+                          dat$MONOPOLY / dat$TSFAT,
+                          0)
+
+    dat$heifattyacid <- ifelse(dat$TSFAT == 0 & dat$MONOPOLY == 0,
+                               10,
+                               NA)
+
+    dat$heifattyacid <- ifelse(dat$TSFAT == 0 & dat$MONOPOLY > 0,
+                               10,
+                               dat$heifattyacid)
+
+    dat$heifattyacid <- ifelse(dat$faratio >= 2.5,
+                               10,
+                               dat$heifattyacid)
+
+    dat$heifattyacid <- ifelse(dat$faratio <= 1.2,
+                               0,
+                               dat$heifattyacid)
+
+    dat$heifattyacid <- ifelse(is.na(dat$heifattyacid),
+                               10*((dat$faratio-1.2)/(2.5-1.2)),
+                               dat$heifattyacid)
+    # heisodi
+    # sodium
+    dat$sodden <- dat$TSODI / dat$TKCAL
+
+    dat$heisodi <- ifelse(dat$sodden <= 1.1,
+                          10,
+                          NA)
+    dat$heisodi <- ifelse(dat$sodden >= 2.0,
+                          0,
+                          dat$heisodi)
+    dat$heisodi <- ifelse(is.na(dat$heisodi),
+                          10 - (10*(dat$sodden - 1.1)/(2.0-1.1)),
+                          dat$heisodi)
+
+    # heirefgrain
+    # refined grain
+    dat$refgrainnden <- dat$T_G_REFINED / (dat$TKCAL/1000)
+
+    dat$heirefgrain <- ifelse(dat$refgrainnden <= 1.8,
+                              10,
+                              NA)
+    dat$heirefgrain <- ifelse(dat$refgrainnden >= 4.3,
+                              0,
+                              dat$heirefgrain)
+
+    dat$heirefgrain <- ifelse(is.na(dat$heirefgrain),
+                              10 - (10*(dat$refgrainnden - 1.8)/(4.3-1.8)),
+                              dat$heirefgrain)
+
+    # heisofaas
+    dat$sofa_perc <- 100* (dat$EMPTYCAL10/dat$TKCAL)
+
+    dat$heisofaas <- ifelse(dat$sofa_perc >= 50,
+                            0,
+                            NA)
+
+    dat$heisofaas <- ifelse(dat$sofa_perc <= 19,
+                            20,
+                            dat$heisofaas)
+
+    dat$heisofaas = ifelse(is.na(dat$heisofaas),
+                           20 - (20*(dat$sofa_perc-19)/(50-19)),
+                           dat$heisofaas)
+
+    dat$heitotal = dat$heiveg + dat$heibngrn + dat$heitotfrt + dat$heiwholefrt + dat$heiwholegrain + dat$heidairy + dat$heitotpro + dat$heiseaplantpro + dat$heifattyacid + dat$heirefgrain + dat$heisofaas + dat$heisodi
+
+    dat
 
 }

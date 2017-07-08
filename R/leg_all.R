@@ -6,30 +6,72 @@
 
 leg_all <- function(dat) {
 
-    require(magrittr, quietly = TRUE)
-    dat %>%
-        dplyr::mutate(
-            mbmax = 2.5*(TKCAL/1000),
-            meatleg = ifelse(ALLMEAT < mbmax, T_V_LEGUMES*4, 0),
-            needmeat = ifelse(ALLMEAT < mbmax, mbmax - ALLMEAT, 0),
-            lallmeat = ifelse(meatleg <= needmeat, ALLMEAT + meatleg, 0),
-            lseaplant = ifelse(meatleg <= needmeat, SEAPLANT + meatleg, 0),
-            lvtotal = ifelse(meatleg <= needmeat, T_V_TOTAL, 0),
-            lbeangrn = ifelse(meatleg <= needmeat, T_V_DRKGR, 0)
-        ) %>%
-        dplyr::mutate(
-            extrameat = ifelse(meatleg > needmeat, meatleg - needmeat, 0),
-            extraleg = ifelse(meatleg > needmeat, extrameat/4, 0),
-            lallmeat = ifelse(meatleg > needmeat, ALLMEAT + needmeat, lallmeat),
-            lseaplant = ifelse(meatleg > needmeat, SEAPLANT + needmeat, lseaplant),
-            lvtotal = ifelse(meatleg > needmeat, T_V_TOTAL + extraleg, lvtotal),
-            lbeangrn = ifelse(meatleg > needmeat, T_V_DRKGR + extraleg, lbeangrn)
-        ) %>%
-        dplyr::mutate(
-            lallmeat = ifelse(ALLMEAT >= mbmax, ALLMEAT, lallmeat),
-            lseaplant = ifelse(ALLMEAT >= mbmax, SEAPLANT, lseaplant),
-            lvtotal = ifelse(ALLMEAT >= mbmax, T_V_TOTAL + T_V_LEGUMES, lvtotal),
-            lbeangrn = ifelse(ALLMEAT >= mbmax, T_V_DRKGR + T_V_LEGUMES, lbeangrn)
-        )
+    dat$mbmax <- 2.5*(dat$TKCAL/1000)
+
+    dat$meatleg <- ifelse(dat$ALLMEAT < dat$mbmax,
+                          dat$T_V_LEGUMES*4,
+                          0)
+
+    dat$needmeat <- ifelse(dat$ALLMEAT < dat$mbmax,
+                           dat$mbmax - dat$ALLMEAT,
+                           0)
+
+    dat$lallmeat <- ifelse(dat$meatleg <= dat$needmeat,
+                           dat$ALLMEAT + dat$meatleg,
+                           0)
+
+    dat$lseaplant <- ifelse(dat$meatleg <= dat$needmeat,
+                            dat$SEAPLANT + dat$meatleg,
+                            0)
+
+    dat$lvtotal <- ifelse(dat$meatleg <= dat$needmeat,
+                          dat$T_V_TOTAL,
+                          0)
+
+    dat$lbeangrn <- ifelse(dat$meatleg <= dat$needmeat,
+                           dat$T_V_DRKGR,
+                           0)
+
+    dat$extrameat <- ifelse(dat$meatleg > dat$needmeat,
+                            dat$meatleg - dat$needmeat,
+                            0)
+
+    dat$extraleg <- ifelse(dat$meatleg > dat$needmeat,
+                           dat$extrameat/4,
+                           0)
+
+    dat$lallmeat <- ifelse(dat$meatleg > dat$needmeat,
+                           dat$ALLMEAT + dat$needmeat,
+                           dat$lallmeat)
+
+    dat$lseaplant <- ifelse(dat$meatleg > dat$needmeat,
+                            dat$SEAPLANT + dat$needmeat,
+                            dat$lseaplant)
+
+    dat$lvtotal <- ifelse(dat$meatleg > dat$needmeat,
+                          dat$T_V_TOTAL + dat$extraleg,
+                          dat$lvtotal)
+
+    dat$lbeangrn <- ifelse(dat$meatleg > dat$needmeat,
+                           dat$T_V_DRKGR + dat$extraleg,
+                           dat$lbeangrn)
+
+    dat$lallmeat <- ifelse(dat$ALLMEAT >= dat$mbmax,
+                           dat$ALLMEAT,
+                           dat$lallmeat)
+
+    dat$lseaplant <- ifelse(dat$ALLMEAT >= dat$mbmax,
+                            dat$SEAPLANT,
+                            dat$lseaplant)
+
+    dat$lvtotal <- ifelse(dat$ALLMEAT >= dat$mbmax,
+                          dat$T_V_TOTAL + dat$T_V_LEGUMES,
+                          dat$lvtotal)
+
+    dat$lbeangrn <- ifelse(dat$ALLMEAT >= dat$mbmax,
+                           dat$T_V_DRKGR + dat$T_V_LEGUMES,
+                           dat$lbeangrn)
+
+    dat
 
 }
