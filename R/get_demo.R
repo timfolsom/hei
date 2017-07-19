@@ -17,4 +17,7 @@ get_demo <- function(year) {
     keepers <- c("SEQN", "SDDSRVYR")
     dat <- dat[,names(dat) %in% keepers]
 
+    # have to convert each column to numeric to remove labelling from NHANES
+    dat <- data.frame(apply(dat, 2, as.numeric))
+
 }

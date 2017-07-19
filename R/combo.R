@@ -5,29 +5,26 @@
 #' @param demograph demographic data from NHANES database
 #' @param agethresh numeric threshold for age of survey participants to be included
 #' @export
-#' @importFrom (magrittr,"%>%")
 #' @return data frame of combined fped, dietary and demographic data
 
 combo <- function(fped, diet, demograph, agethresh = 2) {
 
-    require(magrittr, quietly = TRUE)
+    dat <- merge(fped, diet, all.x = TRUE, by = "SEQN")
+    dat <- merge(dat, demograph, all.x = TRUE, by = "SEQN")
+    dat <- subset(dat, dat$RIDAGEYR >= agethresh)
+    dat <- subset(dat, dat$DRSTZ == 1)
+    # dat <- subset(dat, RIDAGEYR >=agethresh & DRSTZ == 1)
 
-    fped %>%
-        dplyr::left_join(diet, by = "SEQN") %>%
-        dplyr::left_join(demograph, by = "SEQN") %>%
-        # need to be at least 2 years old and there should be recall
-        dplyr::filter_(~RIDAGEYR >= agethresh) %>%
-        dplyr::filter_(~DRSTZ == 1) %>%
-        # # create combo variables
-        dplyr::mutate(
-            WHOLEFRT = ~T_F_CITMLB + T_F_OTHER,
-            MONOPOLY = ~TMFAT + TPFAT,
-            ALLMEAT = ~T_PF_MPS_TOTAL + T_PF_EGGS + T_PF_NUTSDS + T_PF_SOY,
-            SEAPLANT = ~T_PF_SEAFD_HI + T_PF_SEAFD_LOW + T_PF_NUTSDS + T_PF_SOY,
-            ADDSUGC = 16*~T_ADD_SUGARS,
-            SOLFATC = 9*~T_SOLID_FATS,
-            MAXALCGR = 13 *(~TKCAL/1000),
-            EXALCCAL = ifelse(~TALCO <= ~MAXALCGR, 0, 7*(~TALCO-~MAXALCGR)),
-            EMPTYCAL10 = ~ADDSUGC + SOLFATC + EXALCCAL
-        )
+    dat$WHOLEFRT <- dat$T_F_CITMLB + dat$T_F_OTHER
+    dat$MONOPOLY <- dat$TMFAT + dat$TPFAT
+    dat$ALLMEAT <- dat$T_PF_MPS_TOTAL + dat$T_PF_EGGS + dat$T_PF_NUTSDS + dat$T_PF_SOY
+    dat$SEAPLANT <- dat$T_PF_SEAFD_HI + dat$T_PF_SEAFD_LOW + dat$T_PF_NUTSDS + dat$T_PF_SOY
+    dat$ADDSUGC <- 16*dat$T_ADD_SUGARS
+    dat$SOLFATC <- 9*dat$T_SOLID_FATS
+    dat$MAXALCGR = 13 *(dat$TKCAL/1000)
+    dat$EXALCCAL <- ifelse(dat$TALCO <= dat$MAXALCGR, 0, 7*(dat$TALCO-dat$MAXALCGR))
+    dat$EMPTYCAL10 <- dat$ADDSUGC + dat$SOLFATC + dat$EXALCCAL
+
+    dat
+
 }

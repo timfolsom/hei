@@ -2,7 +2,11 @@
 title: "hei Vignette"
 author: "Tim Folsom"
 date: "6/27/2017"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{hei Vignette}
+  %\usepackage[UTF-8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}

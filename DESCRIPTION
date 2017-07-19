@@ -12,7 +12,8 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-    dplyr,
-    nhanesA,
-    magrittr
-RoxygenNote: 6.0.1
+    nhanesA
+RoxygenNote: 6.0.1.9000
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
