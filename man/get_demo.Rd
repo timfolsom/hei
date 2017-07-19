@@ -7,7 +7,7 @@
 get_demo(year)
 }
 \arguments{
-\item{year}{year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010" or "2011/2012"}
+\item{year}{year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
 }
 \value{
 data frame of NHANES demographic database

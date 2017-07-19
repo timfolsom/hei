@@ -7,9 +7,9 @@
 get_diet(year, day = "both")
 }
 \arguments{
-\item{year}{year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010" or "2011/2012"}
+\item{year}{year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
 
-\item{day}{identifier for survey day to retrive ... must be one of "first", "second" or "both" (default is set to "both")}
+\item{day}{identifier for survey day to retrieve ... must be one of "first", "second" or "both" (default is set to "both")}
 }
 \value{
 data frame of NHANES dietary database

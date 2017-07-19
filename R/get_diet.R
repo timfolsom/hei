@@ -1,7 +1,7 @@
 #' retrieve dietary data from NHANES database
 #'
-#' @param year year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010" or "2011/2012"
-#' @param day identifier for survey day to retrive ... must be one of "first", "second" or "both" (default is set to "both")
+#' @param year year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"
+#' @param day identifier for survey day to retrieve ... must be one of "first", "second" or "both" (default is set to "both")
 #' @return data frame of NHANES dietary database
 #' @export
 
@@ -10,7 +10,8 @@ get_diet <- function(year, day = "both") {
     yearchoices <- c("D" = "2005/2006",
                      "E"= "2007/2008",
                      "F"="2009/2010",
-                     "G"= "2011/2012")
+                     "G"= "2011/2012",
+                     "H" = "2013/2014")
 
     try(if(!year %in% yearchoices) stop("must use valid year choice"))
 
