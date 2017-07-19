@@ -2,7 +2,6 @@
 #'
 #' @param dat data to be processed
 #' @return data frame of dietary values with legumes allocated appropriately
-#' @export
 
 leg_all <- function(dat) {
 

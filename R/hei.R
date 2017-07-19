@@ -6,6 +6,7 @@
 
 hei <- function(dat) {
 
+    dat <- leg_all(dat)
     # heiveg
     # total veggies
     dat$vegden <- dat$lvtotal / (dat$TKCAL/1000)
