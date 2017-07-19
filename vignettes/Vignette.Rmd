@@ -13,7 +13,13 @@ vignette: >
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
-First we load the hei package and the tidyverse package. tidyverse is not necessary but the ``` %>% ``` pipe from dplyr among other functions will be used in this analysis.
+## Introduction
+
+The Healthy Eating Index is a dietary metric that guages adherence to the Dietary Guidelines for Americans. The USDA uses the index primarly to keep tabs on the diet quality of the US population. By design, the HEI is geared toward use with national surveys such as the National Health and Nutrition Examination Survey conducted biannually by the CDC. The USDA offers guidance to researchers who would be interested in using the HEI in their analysis of dietary trends and other health factors. Documentation on the offical website walks through the steps of computing HEI scores from NHANES data via SAS. This package is inspired largely by the SAS code made available by the USDA. Its inteded use is as a tool for R users to perform these kinds of analyses and is best understood as a companion to NHANES. Note: an R package called nhanesA exists and is useful for retrieving NHANES datasets.
+
+This vignette will cover two typical analyses that HEI scores might be used in and will highlight how this package is employed in the process.
+
+To get started, first we load the hei package and the tidyverse package. tidyverse is not necessary but the ``` %>% ``` pipe from dplyr, among other functions, will be used throughout the following examples.
 
 ```{r, echo=TRUE}
 library(hei)
@@ -21,6 +27,8 @@ library(tidyverse)
 ```
 
 ## FPED: retrieving and cleaning data
+
+In NHANES itself, each food item that each individual has eaten during the reported period is listed separately. FPED is a database with an entry for each NHANES participant and total amounts of the cup or ounce equivalents of the foods reported broken down into several constituent categories. E.g. if one entry in NHANES contains a slice of cheese pizza, the corresponding entry in FPED would receive 0.25 cup eq., 0.5 cup eq., and 10 oz eq. in the tomato and tomato products, cheese, and refined grains categories, respectively. The amounts in each of these categories is what goes into the HEI score calculation, therefore, when analyzing NHANES data, it is benficial to start with an FPED dataset and join it with the  NHANES datasets that contain information on the variables you are interested in relating the dietary data to. This is what we will do in each of the following examples.
 
 It helps to start with a dataset from FPED already downloaded. You can get one of your own here: https://www.ars.usda.gov/northeast-area/beltsville-md/beltsville-human-nutrition-research-center/food-surveys-research-group/docs/fped-databases/
 
@@ -54,6 +62,112 @@ FPED_BOTH_0910 <-
   group_by(SEQN) %>% summarise_all(funs(mean))
 ```
 
+<!-- # ```{r, echo=TRUE, message=TRUE} -->
+<!-- # head(FPED_BOTH_0910) -->
+<!-- # ``` -->
+
+## The five functions of the hei package
+
+This is where the magic happens. These function calls do all of the score calculating. Everything that comes before and after this is either simply data manipulation or part of the analysis that happens to be of interest.
+
+```{r, echo=TRUE, results='hide'}
+diet0910 <- get_diet("2009/2010")
+
+demo0910 <- get_demo("2009/2010")
+
+alldat0910 <- combo(FPED_BOTH_0910,diet0910,demo0910)
+
+lalldat0910 <- leg_all(alldat0910)
+
+hei0910 <- hei(lalldat0910)
+```
+
+## Analysis 1: BMI
+
+We will now conduct a linear regression analysis to examine the relationship between Body Mass Index and HEI scores. First select only the relevant columns from the output dataset.
+
+```{r, echo=TRUE}
+hei0910 <- hei0910 %>% 
+    select(SEQN:RIDRETH1, INDFMPIR:SDMVSTRA, WTDR2D, heitotal)
+```
+
+Then, using the nhanesA package, pull down NHANES body measures data from the web. Select the relevant columns and filter out those rows that contain missing data.
+
+```{r, echo=TRUE, results='hide'}
+BMX_0910 <- nhanesA::nhanes('BMX_F') %>%
+    select(SEQN, BMXBMI) %>% 
+    filter(!is.na(BMXBMI))
+```
+
+Merge the BMI data with our HEI data. We will also restrict our analysis to adults (age 20 and over).
+
+```{r, echo=TRUE}
+heibmi0910 <- merge(hei0910, BMX_0910, by = "SEQN") %>%
+    filter(RIDAGEYR > 19)
+```
+
+We can produce a scatterplot (using a function from the car package) visualizing the distributions of BMI and HEI scores as well as their relationship to each other.
+
 ```{r, echo=TRUE, message=TRUE}
-head(FPED_BOTH_0910)
+car::scatterplot(BMXBMI ~ heitotal, data=heibmi0910)
+```
+
+The distriubtion of HEI scores appears to be normally distributed (an assumption of linear regression).
+
+```{r, echo=TRUE, message=TRUE}
+hist(heibmi0910$heitotal)
+```
+
+We see that HEI is a highly significant predictor of BMI, though the effect size is small.
+
+```{r, echo=TRUE, message=TRUE}
+heibmi0910.lm <- lm(BMXBMI ~ heitotal, data=heibmi0910)
+summary(heibmi0910.lm)
+```
+
+
+## Analysis 2: Food Security
+
+This next example will analyze the relationship between HEI and food security. As before, we first select only the relevant columns from the original output dataset.
+
+```{r, echo=TRUE}
+hei0910 <- hei0910 %>% 
+    select(SEQN:RIDRETH1, INDFMPIR:SDMVSTRA, WTDR2D, heitotal)
+```
+
+Then, using the nhanesA package, pull down NHANES food security data from the web. Select the relevant columns and filter out those rows that contain missing data.
+
+```{r, echo=TRUE, results='hide'}
+FSQ_0910 <- nhanesA::nhanes('FSQ_F') %>%
+    select(SEQN, FSDAD) %>% 
+    filter(!is.na(FSDAD))
+```
+
+Merge the food security data with our HEI data. We will also restrict our analysis to adults (age 20 and over).
+
+```{r, echo=TRUE}
+heifsq0910 <- merge(hei0910, FSQ_0910, by = "SEQN") %>%
+    filter(RIDAGEYR > 19)
+```
+
+We can produce a barplot to apporximate the distribution of individuals across the four categories (1 meaning totally secure, 4 representing very little security).
+
+```{r, echo=TRUE}
+ggplot(heifsq0910, aes(FSDAD)) + geom_bar()
+```
+
+The average score for those in group 1 appears to be quite a bit higher than the rest of the groups.
+
+```{r, echo=TRUE, message=TRUE}
+heifsq0910 %>% 
+    group_by(FSDAD) %>% 
+    summarise(mean(heitotal))
+```
+
+We see that the difference between the secure grorup and each of the other groups is highly significant.
+
+```{r, echo=TRUE, message=TRUE}
+heifsq0910$FSDAD <- relevel(factor(heifsq0910$FSDAD), ref="1")
+heifsq0910.lm <- lm(heitotal ~ FSDAD, data=heifsq0910)
+summary(heifsq0910.lm)
 ```
