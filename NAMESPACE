@@ -3,4 +3,5 @@
 export(combo)
 export(get_demo)
 export(get_diet)
+export(get_fped)
 export(hei)
