@@ -1,0 +1,64 @@
+---
+title: "hei Vignette"
+author: "Tim Folsom"
+date: "6/27/2017"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{hei Vignette}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+This vignette provides background information about the Healthy Eating Index and a broad overview of the application of the hei package. An additional vignette walking step-by-step through a typical analysis is provided as well.
+
+## Introduction
+
+The Healthy Eating Index is a dietary metric that gauges adherence to the Dietary Guidelines for Americans. The USDA uses the index primarily to keep tabs on the diet quality of the US population. By design, the HEI is geared toward use with national surveys such as the National Health and Nutrition Examination Survey (NHANES) conducted biannually by the CDC. The USDA offers guidance to researchers who would be interested in using the HEI in their analyse s of dietary trends and other health factors. Documentation on the National Institute of Health's official website walks through the steps of computing HEI scores from NHANES data with SAS. This package draws inspiration from the associated SAS code. Its intended use is as a tool for R users to perform these kinds of analyses and is best understood as a companion to NHANES. Note: an R package called nhanesA exists, is useful for retrieving NHANES data sets, and is required by this package.
+
+To get started, first we load the hei package and the tidyverse package. The latter, in case you are unfamiliar, provides access to a number of useful functions that, while not necessary, greatly simplify some of the data manipulation steps and as such is recommended and will be used throughout these examples. Some of the functions included are filter(), group_by(), and select(), as well as the ``` %>% ``` "pipe."
+
+```{r, echo=TRUE}
+library(hei)
+library(tidyverse)
+```
+
+## NHANES and the get_demo()/get_diet() functions
+
+NHANES is conducted using a complex sampling method, such that each participant, based on certain demographic characteristics, is assigned a weighting variable that, when incorporated appropriately into the analysis allows conclusions to be drawn regarding the overall US population. As part of the in-depth survey, a thorough dietary recall is taken, in which participants relate each food and drink item consumed in the previous 24-hour period, along with the amount. A follow-up phone call during which an identical dietary recall is conducted takes place several weeks later. Thus, except in cases where the participant could not be reached for follow-up or their recall was deemed unreliable, there are two day's worth of dietary data associated with each participant. The get_demo() and get_diet() funtions each take two arguments, one specifying the survey year (e.g. "2009/2010") and another specifying the day (either "one," "two," or "both" with "both" being the default). These functions retrun data sets with key NHANES demographic and dietary variables, respectively.
+
+```{r, echo=TRUE, results='hide'}
+diet0910 <- get_diet("2009/2010")
+
+demo0910 <- get_demo("2009/2010")
+```
+
+## FPED and the get_fped() function
+
+In NHANES itself, each food item that each individual has eaten during the reported period is listed separately. FPED is a database with an entry for each NHANES participant and total amounts of the cup or ounce equivalents of the foods reported broken down into many constituent categories. E.g. if one entry in NHANES contains a slice of cheese pizza, the corresponding entry in FPED would contain, say, 0.25 cup eq., 0.5 cup eq., and 10 oz eq. in the tomato and tomato products, cheese, and refined grains categories, respectively. The amounts in each of these categories is what goes into the HEI score calculation. The hei function, get_fped(), takes a year and a day as its arguments (just like the first two functions) and returns the corresponding FPED data set. If you would like to learn more about the FPED or how it is created, you can do so here: https://www.ars.usda.gov/northeast-area/beltsville-md/beltsville-human-nutrition-research-center/food-surveys-research-group/docs/fped-databases/
+
+Note: the FPED data sets available through this package were originally downloaded from the above site and manually exported from SAS as .csv files.
+
+
+```{r, echo=TRUE, results='hide'}
+fped0910 <- get_fped("2009/2010")
+```
+
+## Sealing the deal with the combo(), leg_all(), and hei() fucntions
+
+The combo() function takes as its arguments three data sets: an FPED data set, a NHANES dietary data set, and an NHANES demographic data set. In other words, combo() simply takes as its arguments the results of the first three functions and outputs a single data set containing all the variables necessary to calculate HEI scores from as well as key demographic data. Legumes are handled interestingly when it comes to calculating HEI scores (they can be treated as vegetables or protiens up to certain thresholds). The leg_all() function takes a formatted data set (i.e. the kind output by the combo() function) and outputs a data set in which legumes have been allocated into the appropriate categories. Finally, the hei() function, the culmination of all, takes a dietary data set in which all legumes have been apprpriately allocated (i.e. the kind output by the leg_all() function) and outputs a data set containing an HEI score for each participant.
+
+This data set can then be used in any number of analyses relating to diet and other outcomes. As it retains the unique NHANES identifying variable, it can be joined with any other NHANES data set to gain access to a host of other variables which may be of interest. An example of how to do this is provided in a second vignette.
+
+```{r, echo=TRUE, results='hide'}
+alldat0910 <- combo(fped0910, diet0910, demo0910)
+
+hei0910 <- hei(alldat0910)
+```
+
+```{r, echo=TRUE, message=TRUE}
+head(hei0910)
+```

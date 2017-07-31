@@ -1,0 +1,122 @@
+---
+title: "Analysis"
+author: "Tim Folsom"
+date: "7/31/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+This vignette will cover two typical analyses that HEI scores might be used in and will highlight how this package is employed in the process.
+
+```{r, echo=TRUE}
+library(hei)
+library(tidyverse)
+library(car)
+```
+
+We'll be using data for both days (which is the default).
+
+```{r, echo=TRUE, results='hide'}
+diet0910 <- get_diet("2009/2010")
+
+demo0910 <- get_demo("2009/2010")
+
+fped0910 <- get_fped("2009/2010")
+
+alldat0910 <- combo(fped0910, diet0910, demo0910)
+
+hei0910 <- hei(alldat0910)
+```
+
+## Analysis 1: BMI
+
+We will now conduct a linear regression analysis to examine the relationship between Body Mass Index and HEI scores. First select only the relevant columns from the output data set.
+
+```{r, echo=TRUE}
+hei0910 <- hei0910 %>% 
+    select(SEQN:RIDRETH1, INDFMPIR:SDMVSTRA, WTDR2D, heitotal)
+```
+
+Then, using the nhanesA package, pull down NHANES body measures data from the web. Select the relevant columns and filter out those rows that contain missing data.
+
+```{r, echo=TRUE, results='hide'}
+BMX_0910 <- nhanesA::nhanes('BMX_F') %>%
+    select(SEQN, BMXBMI) %>% 
+    filter(!is.na(BMXBMI))
+```
+
+Merge the BMI data with our HEI data. We will also restrict our analysis to adults (age 20 and over).
+
+```{r, echo=TRUE}
+heibmi0910 <- merge(hei0910, BMX_0910, by = "SEQN") %>%
+    filter(RIDAGEYR > 19)
+```
+
+We can produce a scatter plot (using a function from the car package) visualizing the distributions of BMI and HEI scores as well as their relationship to each other.
+
+```{r, echo=TRUE, message=TRUE}
+car::scatterplot(BMXBMI ~ heitotal, data=heibmi0910)
+```
+
+The distribution of HEI scores appears to be normally distributed (an assumption of linear regression).
+
+```{r, echo=TRUE, message=TRUE}
+hist(heibmi0910$heitotal)
+```
+
+We see that HEI is a highly significant predictor of BMI, though the effect size is small.
+
+```{r, echo=TRUE, message=TRUE}
+heibmi0910.lm <- lm(BMXBMI ~ heitotal, data=heibmi0910)
+summary(heibmi0910.lm)
+```
+
+
+## Analysis 2: Food Security
+
+This next example will analyze the relationship between HEI and food security. As before, we first select only the relevant columns from the original output data set.
+
+```{r, echo=TRUE}
+hei0910 <- hei0910 %>% 
+    select(SEQN:RIDRETH1, INDFMPIR:SDMVSTRA, WTDR2D, heitotal)
+```
+
+Then, using the nhanesA package, pull down NHANES food security data from the web. Select the relevant columns and filter out those rows that contain missing data.
+
+```{r, echo=TRUE, results='hide'}
+FSQ_0910 <- nhanesA::nhanes('FSQ_F') %>%
+    select(SEQN, FSDAD) %>% 
+    filter(!is.na(FSDAD))
+```
+
+Merge the food security data with our HEI data. We will also restrict our analysis to adults (age 20 and over).
+
+```{r, echo=TRUE}
+heifsq0910 <- merge(hei0910, FSQ_0910, by = "SEQN") %>%
+    filter(RIDAGEYR > 19)
+```
+
+We can produce a bar plot to approximate the distribution of individuals across the four categories (1 meaning totally secure, 4 representing very little security).
+
+```{r, echo=TRUE}
+ggplot(heifsq0910, aes(FSDAD)) + geom_bar()
+```
+
+The average score for those in group 1 appears to be quite a bit higher than the rest of the groups.
+
+```{r, echo=TRUE, message=TRUE}
+heifsq0910 %>% 
+    group_by(FSDAD) %>% 
+    summarise(mean(heitotal))
+```
+
+We see that the difference between the secure group and each of the other groups is highly significant.
+
+```{r, echo=TRUE, message=TRUE}
+heifsq0910$FSDAD <- relevel(factor(heifsq0910$FSDAD), ref="1")
+heifsq0910.lm <- lm(heitotal ~ FSDAD, data=heifsq0910)
+summary(heifsq0910.lm)
+```
