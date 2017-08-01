@@ -23,7 +23,6 @@ To get started, first we load the hei package and the tidyverse package. The lat
 
 ```{r, echo=TRUE}
 library(hei)
-library(tidyverse)
 ```
 
 ## NHANES and the get_demo()/get_diet() functions

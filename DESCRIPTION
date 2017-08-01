@@ -17,5 +17,7 @@ Imports:
 RoxygenNote: 6.0.1.9000
 Suggests: knitr,
     rmarkdown,
-    testthat
+    testthat,
+    dplyr,
+    ggplot2
 VignetteBuilder: knitr

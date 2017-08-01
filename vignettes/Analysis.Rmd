@@ -13,7 +13,8 @@ This vignette will cover two typical analyses that HEI scores might be used in a
 
 ```{r, echo=TRUE}
 library(hei)
-library(tidyverse)
+library(ggplot2)
+library(dplyr)
 library(car)
 ```
 
