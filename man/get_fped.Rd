@@ -2,18 +2,41 @@
 % Please edit documentation in R/get_fped.R
 \name{get_fped}
 \alias{get_fped}
-\title{retrieve FPED data}
+\title{FPED data retrieval.}
 \usage{
 get_fped(year, day = "both")
 }
 \arguments{
-\item{year}{year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
+\item{year}{year combination of data set to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
 
 \item{day}{identifier for FPED data to retrieve ... must be one of "first", "second" or "both" (default is set to "both")}
 }
 \value{
-object of class \code{data.frame} containing FPED data for specificed year and day
+Object of class \code{tbl_df} containing a modified FPED data set for specified year and day. FPED proper contains several more variables than are necessary for computing HEI scores. The data set returned by this function has been trimmed down to contain (in addition to an NHANES unique sequence identifier for each participant, age, and dietary recall status) only the columns of data needed for HEI score calculation, specifically:
+\itemize{
+\item T_F_CITMLB: Intact fruits (whole or cut) of citrus, melons, and berries (cup eq.)
+\item T_PF_EGGS: Eggs (chicken, duck, goose, quail) and egg substitutes (oz. eq.)
+\item T_F_OTHER: Intact fruits (whole or cut); excluding citrus, melons, and berries (cup eq.)
+\item T_PF_MPS_TOTAL: Total of meat, poultry, seafood, organ meat, and cured meat (oz. eq.)
+\item T_PF_SOY: Soy products, excluding calcium fortified soy milk (soymilk) and mature soybeans (oz. eq.)
+\item T_PF_SEAFD_HI: Seafood (finfish, shellfish, and other seafood) high in n-3 fatty acids (oz. eq.)
+\item T_PF_SEAFD_LOW: Seafood (finfish, shellfish, and other seafood) low in n-3 fatty acids (oz. eq.)
+\item T_PF_NUTSDS: Peanuts, tree nuts, and seeds; excludes coconut (oz. eq.)
+\item T_SOLID_FATS: Fats naturally present in meat, poultry, eggs, and dairy (lard, tallow, and butter); hydrogenated or partially hydrogenated oils; shortening; palm, palm kernel and coconut oils; fat naturally present in coconut meat and cocoa butter; and 50% of fat present in stick and tub margarines and margarine spreads (grams)
+\item T_ADD_SUGARS: Foods defined as added sugars (tsp. eq.)
+\item T_V_TOTAL: Total dark green, red and orange, starchy, and other vegetables; excludes legumes (cup eq.)
+\item T_V_LEGUMES: Total dark green, red and orange, starchy, and other vegetables; excludes legumes (cup eq.)
+\item T_V_DRKGR: Dark green vegetables (cup eq.)
+\item T_F_TOTAL: Total intact fruits (whole or cut) and fruit juices (cup eq.)
+\item T_G_WHOLE: Grains defined as whole grains and contain the entire grain kernel ― the bran, germ, and endosperm (oz. eq.)
+\item T_D_TOTAL: Total milk, yogurt, cheese, and whey. For some foods, the total dairy values could be higher than the sum of D_MILK, D_YOGURT, and D_CHEESE because miscellaneous dairy component composed of whey is not included in FPED as a separate variable. (cup eq.)
+\item T_G_REFINED: Refined grains that do not contain all of the components of the entire grain kernel (oz. eq.)
+}
 }
 \description{
-retrieve FPED data
+\code{get_fped} returns an abridged Food Patterns Equivalents Database data set for a given year.
+}
+\examples{
+get_fped("2009/2010")
+get_fped("2009/2010", "first")
 }

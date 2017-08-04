@@ -6,7 +6,7 @@
 ___
 ### Overview
 ___
-The goal of hei is to calculate Healthy Eating Index scores. The Healthy Eating Index is a dietary metric designed by the USDA and NCI to gauge adherence to the US Dietary Guidelines.
+The goal of `hei` is to calculate Healthy Eating Index (HEI) scores from National Health and Nutrition Examination Survey (NHANES) data for use in dietary analyses. The HEI is a dietary metric designed by the USDA and NCI to gauge adherence to the US Dietary Guidelines.
 ### Installation
 ___
 ```
@@ -16,17 +16,15 @@ devtools::install_github("vpnagraj/hei")
 ___
 >`library(hei)`
 
-hei can be used to perform two key calculations.
+The hei package contains one key function:
 
->`leg_all()` works on a dataset containing the necessary food patterns information for a collection of individuals (such as that recorded in NHANES and the FPED), returning a dataset containing additional variables representing protein categories with legumes appropriately allocated.
+>`hei()` works on a formatted data set containing food patterns information (such as that returned by the helper function, `hei::combo()`) returning a data set with scores for each of the twelve HEI components as well as a total score.
 
->`hei()` works on a dataset containing food patterns information that includes protein categories with legumes appropriately allocated (such as that returned by `leg_all()`) returning a dataset with scores for each of the twelve HEI components as well as a total score.
-
-hei also includes `get_diet()` and `get_demo()` for retrieving NHANES dietary and demographic data from the web for a given year, respectively, as well as `combo()`, which will join an FPED data set with a dietary and a demographic dataset such as these.
+hei also includes `get_fped()` `get_diet()` and `get_demo()` for retrieving data from the Food Patterns Equivalents Database (FPED) and the NHANES dietary and demographic databases, respectively, modified for optimization with `combo()` (which combines and formats these data sets for use in `hei()`). The FPED data sets (in the public domain) retrieved by `get_fped()` are built into the package and have been converted to .csv files from the SAS data format in which they were originally published by their creators. `get_diet()` and `get_demo()` require the R package `nhanesA` which is employed to retrieve NHANES data sets directly from the web.
 ### Related Work
 ___
-hei utilizes several tidyverse packages including dplyr and readr. hei also uses the nhanesA package.
+hei is intended as a tool to aid in the analysis of NHANES data. It is important to be familiar with NHANES and its complex survey design as well as the FPED, which is derived from NHANES, before beginning any analyses involving the HEI.
 
-* [Read more about the tidyverse approach to data analysis.](https://github.com/tidyverse)
+* [NHANES survey methods and analytical guidelines](https://wwwn.cdc.gov/nchs/nhanes/analyticguidelines.aspx)
 
-* [Learn about the NHANES survey package.](https://github.com/cjendres1/nhanes)
+* [FPED methodology and user guides](https://www.ars.usda.gov/northeast-area/beltsville-md/beltsville-human-nutrition-research-center/food-surveys-research-group/docs/fped-methodology/)
