@@ -2,16 +2,22 @@
 % Please edit documentation in R/get_demo.R
 \name{get_demo}
 \alias{get_demo}
-\title{retrieve demographic data from NHANES database}
+\title{NHANES demographic data retrieval.}
 \usage{
 get_demo(year)
 }
 \arguments{
-\item{year}{year combination of dataset to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
+\item{year}{year combination of data set to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
 }
 \value{
-data frame of NHANES demographic database
+Object of class \code{data.frame} containing a modified NHANES demographic data set for a specified year. The complete NHANES demographic data set contains several more variables than are necessary for computing HEI scores. In fact, the only variable contained in the returned data set (in addition to an NHANES unique sequence identifier for each participant) is not, strictly speaking, even required itself, but becomes relevant if data sets from multiple separate NHANES iterations are concatenated, specifically:
+\itemize{
+\item SDDSRVYR: This variable represents the two-year data release cycle number (e.g. a value of “6” denotes NHANES 2009–2010).
+}
 }
 \description{
-retrieve demographic data from NHANES database
+\code{get_demo} returns an abridged National Health and Nutrition Examination Survey demographic data set for a given year.
+}
+\examples{
+get_demo("2009/2010")
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/combo.R
 \name{combo}
 \alias{combo}
-\title{combine datasets to be used in HEI scoring}
+\title{Data set combination and manipulation for use in HEI scoring.}
 \usage{
 combo(fped, diet, demograph, agethresh = 2)
 }
@@ -16,8 +16,23 @@ combo(fped, diet, demograph, agethresh = 2)
 \item{agethresh}{numeric threshold for age of survey participants to be included}
 }
 \value{
-data frame of combined fped, dietary and demographic data
+Object of class \code{data.frame} representing a data set fully prepped for HEI score calculation. All columns from the three input data sets are preserved while a handful of additional derivative columns are included, specifically:
+\itemize{
+\item WHOLEFRT: T_F_CITMLB (citrus, melons, and berries) + T_F_OTHER (fruits excluding citrus, melons, and berries)
+\item MONOPOLY: TMFAT (total monounsaturated fatty acids) + TPFAT (total polyunsaturated fatty acids)
+\item ALLMEAT: T_PF_MPS_TOTAL (meat, poultry, seafood, organ meat, and cured meat) + T_PF_EGGS (eggs and egg substitutes) + T_PF_NUTSDS (peanuts, tree nuts, and seeds) + T_PF_SOY (soy products)
+\item SEAPLANT: T_PF_SEAFD_HI (Seafood high in n-3 fatty acids) + T_PF_SEAFD_LOW (Seafood low in n-3 fatty acids) + T_PF_NUTSDS (peanuts, tree nuts, and seeds) + T_PF_SOY + (soy products)
+\item ADDSUGC: T_ADD_SUGARS (added sugars) * 16
+\item SOLFATC: T_SOLID_FATS (fats naturally present in meat, etc.) * 9
+\item MAXALCGR: TKCAL (total calories) / 1000 * 13
+\item EXALCCAL (amount of alcohol above acceptable threshold): (TALCO (total alcohol) - MAXALCGR) * 7
+\item EMPTYCAL10: ADDSUGC + SOLFATC + EXALCCAL
+}
 }
 \description{
-combine datasets to be used in HEI scoring
+\code{combo} returns a single data set combining the FPED and NHANES dietary and demographic data sets. Additionally, it allows for specification of an age threshold such that records with age values below this number will be excluded from the output. Furthermore, any rows for which dietary recall was deemed unreliable (DRSTZ != 1) are automatically dropped. Finally, additional necessary HEI inputs are generated from the existing columns, see "Value" section below.
+}
+\examples{
+combo(get_fped("2009/2010"), get_diet("2009/2010"), get_demo("2009/2010"))
+combo(get_fped("2009/2010"), get_diet("2009/2010"), get_demo("2009/2010"), 80)
 }

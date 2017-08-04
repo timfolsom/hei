@@ -15,7 +15,6 @@ This vignette will cover two typical analyses that HEI scores might be used in a
 library(hei)
 library(ggplot2)
 library(dplyr)
-library(car)
 ```
 
 We'll be using data for both days (which is the default).
@@ -38,7 +37,7 @@ We will now conduct a linear regression analysis to examine the relationship bet
 
 ```{r, echo=TRUE}
 hei0910 <- hei0910 %>% 
-    select(SEQN:RIDRETH1, INDFMPIR:SDMVSTRA, WTDR2D, heitotal)
+    select(SEQN, RIDAGEYR, heitotal)
 ```
 
 Then, using the nhanesA package, pull down NHANES body measures data from the web. Select the relevant columns and filter out those rows that contain missing data.
@@ -59,7 +58,9 @@ heibmi0910 <- merge(hei0910, BMX_0910, by = "SEQN") %>%
 We can produce a scatter plot (using a function from the car package) visualizing the distributions of BMI and HEI scores as well as their relationship to each other.
 
 ```{r, echo=TRUE, message=TRUE}
-car::scatterplot(BMXBMI ~ heitotal, data=heibmi0910)
+ggplot(heibmi0910, aes(heitotal, BMXBMI)) +
+    geom_point(alpha = 0.25) +
+    geom_smooth(method = "lm")
 ```
 
 The distribution of HEI scores appears to be normally distributed (an assumption of linear regression).
@@ -82,7 +83,7 @@ This next example will analyze the relationship between HEI and food security. A
 
 ```{r, echo=TRUE}
 hei0910 <- hei0910 %>% 
-    select(SEQN:RIDRETH1, INDFMPIR:SDMVSTRA, WTDR2D, heitotal)
+    select(SEQN, RIDAGEYR, heitotal)
 ```
 
 Then, using the nhanesA package, pull down NHANES food security data from the web. Select the relevant columns and filter out those rows that contain missing data.

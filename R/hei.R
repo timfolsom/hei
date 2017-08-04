@@ -1,8 +1,14 @@
-#' calculates individual HEI scores
+#' Individual HEI scores calculation.
+#'
+#' \code{hei} takes a data set with columns of formatted dietary data (per \code{hei::combo}) and returns a data set with calculated total HEI scores for each individual along with scores for HEI constituent scoring categories.
 #'
 #' @param dat data to be scored
-#' @return data frame of HEI data
+#' @return Object of class \code{data.frame} containing all columns of input data set as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.
 #' @export
+#' @examples
+#' hei(combo(get_fped("2009/2010"), get_diet("2009/2010"), get_demo("2009/2010")))
+#' hei(combo(get_fped("2009/2010", "first"), get_diet("2009/2010", "first"), get_demo("2009/2010")))
+#' hei(combo(get_fped("2009/2010", "first" _diet("2009/2010", "first"), get_demo("2009/2010"), 80))
 
 hei <- function(dat) {
 
