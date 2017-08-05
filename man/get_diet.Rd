@@ -26,6 +26,8 @@ Object of class \code{data.frame} containing a modified NHANES dietary data set 
 \code{get_diet} returns an abridged National Health and Nutrition Examination Survey dietary data set for a given year.
 }
 \examples{
-print(get_diet("2009/2010"))
-print(get_diet("2009/2010", "first"))
+\dontrun{
+get_diet("2009/2010", "both")
+get_diet("2009/2010", "first")
+}
 }

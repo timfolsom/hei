@@ -20,8 +20,17 @@
 #' \item EMPTYCAL10: ADDSUGC + SOLFATC + EXALCCAL
 #' }
 #' @examples
-#' combo(get_fped("2009/2010", "both"), get_diet("2009/2010", "both"), get_demo("2009/2010"))
-#' combo(get_fped("2009/2010", "first"), get_diet("2009/2010","first"), get_demo("2009/2010"), 80)
+#' \dontrun{
+#' fped0910 <- get_fped("2009/2010", "both")
+#' diet0910 <- get_diet("2009/2010", "both")
+#' demo0910 <- get_demo("2009/2010")
+#' combo(fped0910,diet0910,demo0910)
+#'
+#' fped0506 <- get_fped("2005/2006", "first")
+#' diet0506 <- get_diet("2005/2006", "first")
+#' demo0506 <- get_demo("2005/2006")
+#' combo(fped0506,diet0506,demo0506, agethresh = 18)
+#' }
 
 combo <- function(fped, diet, demograph, agethresh = 2) {
 

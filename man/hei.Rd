@@ -16,7 +16,17 @@ Object of class \code{data.frame} containing all columns of input data set as we
 \code{hei} takes a data set with columns of formatted dietary data (per \code{hei::combo}) and returns a data set with calculated total HEI scores for each individual along with scores for HEI constituent scoring categories.
 }
 \examples{
-hei(combo(get_fped("2009/2010", "both"), get_diet("2009/2010", "both"), get_demo("2009/2010")))
-hei(combo(get_fped("2009/2010", "first"), get_diet("2009/2010", "first"), get_demo("2009/2010")))
-hei(combo(get_fped("2009/2010", "first"), get_diet("2009/2010", "first"), get_demo("2009/2010"), 80))
+\dontrun{
+fped0910 <- get_fped("2009/2010", "both")
+diet0910 <- get_diet("2009/2010", "both")
+demo0910 <- get_demo("2009/2010")
+all0910 <- combo(fped0910,diet0910,demo0910)
+hei(all0910)
+
+fped0506 <- get_fped("2005/2006", "first")
+diet0506 <- get_diet("2005/2006", "first")
+demo0506 <- get_demo("2005/2006")
+all0506 <- combo(fped0506,diet0506,demo0506)
+hei(all0506)
+}
 }

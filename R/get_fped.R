@@ -27,7 +27,7 @@
 #' @export
 #' @examples
 #' get_fped("2009/2010", "both")
-#' get_fped("2009/2010", "first")
+#' get_fped("2005/2006", "first")
 
 get_fped <- function(year, day) {
 

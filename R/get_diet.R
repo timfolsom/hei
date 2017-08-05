@@ -15,8 +15,10 @@
 #' }
 #' @export
 #' @examples
-#' print(get_diet("2009/2010"))
-#' print(get_diet("2009/2010", "first"))
+#' \dontrun{
+#' get_diet("2009/2010", "both")
+#' get_diet("2009/2010", "first")
+#' }
 
 get_diet <- function(year, day = "both") {
 

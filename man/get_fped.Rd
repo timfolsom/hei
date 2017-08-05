@@ -38,5 +38,5 @@ Object of class \code{tbl_df} containing a modified FPED data set for specified 
 }
 \examples{
 get_fped("2009/2010", "both")
-get_fped("2009/2010", "first")
+get_fped("2005/2006", "first")
 }

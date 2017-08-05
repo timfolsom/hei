@@ -6,9 +6,19 @@
 #' @return Object of class \code{data.frame} containing all columns of input data set as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.
 #' @export
 #' @examples
-#' hei(combo(get_fped("2009/2010", "both"), get_diet("2009/2010", "both"), get_demo("2009/2010")))
-#' hei(combo(get_fped("2009/2010", "first"), get_diet("2009/2010", "first"), get_demo("2009/2010")))
-#' hei(combo(get_fped("2009/2010", "first"), get_diet("2009/2010", "first"), get_demo("2009/2010"), 80))
+#' \dontrun{
+#' fped0910 <- get_fped("2009/2010", "both")
+#' diet0910 <- get_diet("2009/2010", "both")
+#' demo0910 <- get_demo("2009/2010")
+#' all0910 <- combo(fped0910,diet0910,demo0910)
+#' hei(all0910)
+#'
+#' fped0506 <- get_fped("2005/2006", "first")
+#' diet0506 <- get_diet("2005/2006", "first")
+#' demo0506 <- get_demo("2005/2006")
+#' all0506 <- combo(fped0506,diet0506,demo0506)
+#' hei(all0506)
+#' }
 
 hei <- function(dat) {
 
