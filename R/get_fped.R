@@ -16,7 +16,7 @@
 #' \item "second" (study participant data from second day)
 #' \item "both" (data for study participants present in both days, with values averaged across the two days)
 #' }
-#' @return Object of class \code{tbl_df} containing a modified FPED data set for specified year and day. FPED proper contains several more variables than are necessary for computing HEI scores. The data set returned by this function has been trimmed down to contain (in addition to an NHANES unique sequence identifier for each participant, age, and dietary recall status) only the columns of data needed for HEI score calculation, specifically:
+#' @return Object of class \code{data.frame} containing a modified FPED data set for specified year and day. FPED proper contains several more variables than are necessary for computing HEI scores. The data set returned by this function has been trimmed down to contain (in addition to an NHANES unique sequence identifier for each participant, age, and dietary recall status) only the columns of data needed for HEI score calculation, specifically:
 #' \itemize{
 #' \item T_F_CITMLB: Intact fruits (whole or cut) of citrus, melons, and berries (cup eq.)
 #' \item T_PF_EGGS: Eggs (chicken, duck, goose, quail) and egg substitutes (oz. eq.)
