@@ -13,6 +13,8 @@
 #' \item TSODI: Sodium (mg)
 #' \item TALCO: Alcohol (gm)
 #' }
+#'
+#' @references \url{https://www.cdc.gov/nchs/nhanes/nhanes_questionnaires.htm}
 #' @export
 #' @examples
 #' \dontrun{

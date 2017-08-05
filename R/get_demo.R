@@ -7,6 +7,7 @@
 #' \itemize{
 #' \item SDDSRVYR: This variable represents the two-year data release cycle number (e.g. a value of “6” denotes NHANES 2009–2010).
 #' }
+#' @references \url{https://www.cdc.gov/nchs/nhanes/nhanes_questionnaires.htm}
 #' @export
 #' @examples
 #' get_demo("2009/2010")

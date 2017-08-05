@@ -21,3 +21,6 @@ Object of class \code{data.frame} containing a modified NHANES demographic data 
 \examples{
 get_demo("2009/2010")
 }
+\references{
+\url{https://www.cdc.gov/nchs/nhanes/nhanes_questionnaires.htm}
+}

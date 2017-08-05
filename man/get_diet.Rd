@@ -31,3 +31,6 @@ get_diet("2009/2010", "both")
 get_diet("2009/2010", "first")
 }
 }
+\references{
+\url{https://www.cdc.gov/nchs/nhanes/nhanes_questionnaires.htm}
+}

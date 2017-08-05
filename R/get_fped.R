@@ -24,6 +24,7 @@
 #' \item T_D_TOTAL: Total milk, yogurt, cheese, and whey. For some foods, the total dairy values could be higher than the sum of D_MILK, D_YOGURT, and D_CHEESE because miscellaneous dairy component composed of whey is not included in FPED as a separate variable. (cup eq.)
 #' \item T_G_REFINED: Refined grains that do not contain all of the components of the entire grain kernel (oz. eq.)
 #' }
+#' @references \url{https://www.ars.usda.gov/northeast-area/beltsville-md/beltsville-human-nutrition-research-center/food-surveys-research-group/docs/fped-overview/}
 #' @export
 #' @examples
 #' get_fped("2009/2010", "both")

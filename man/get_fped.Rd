@@ -40,3 +40,6 @@ Object of class \code{tbl_df} containing a modified FPED data set for specified 
 get_fped("2009/2010", "both")
 get_fped("2005/2006", "first")
 }
+\references{
+\url{https://www.ars.usda.gov/northeast-area/beltsville-md/beltsville-human-nutrition-research-center/food-surveys-research-group/docs/fped-overview/}
+}
