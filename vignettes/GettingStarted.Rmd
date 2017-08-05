@@ -56,9 +56,10 @@ The combo() function takes as its arguments three data sets: an FPED data set, a
 This data set can then be used in any number of analyses relating to diet and other outcomes. As it retains the unique NHANES identifying variable, it can be joined with any other NHANES data set to gain access to a host of other variables which may be of interest. An example of how to do this is provided in a second vignette.
 
 ```{r, echo=TRUE, results='hide'}
-alldat0910 <- combo(fped0910, diet0910, demo0910)
-
-hei0910 <- hei(alldat0910)
+# alldat0910 <- combo(fped0910, diet0910, demo0910)
+# 
+# hei0910 <- hei(alldat0910)
+hei0910 <- hei(diet0910,demo0910,fped0910)
 ```
 
 ```{r, echo=TRUE, message=TRUE}

@@ -6,7 +6,6 @@
 #' @param diet dietary data from NHANES database
 #' @param demograph demographic data from NHANES database
 #' @param agethresh numeric threshold for age of survey participants to be included
-#' @export
 #' @return Object of class \code{data.frame} representing a data set fully prepped for HEI score calculation. All columns from the three input data sets are preserved while a handful of additional derivative columns are included, specifically:
 #' \itemize{
 #' \item WHOLEFRT: T_F_CITMLB (citrus, melons, and berries) + T_F_OTHER (fruits excluding citrus, melons, and berries)
@@ -19,18 +18,6 @@
 #' \item EXALCCAL (amount of alcohol above acceptable threshold): (TALCO (total alcohol) - MAXALCGR) * 7
 #' \item EMPTYCAL10: ADDSUGC + SOLFATC + EXALCCAL
 #' }
-#' @examples
-#' \dontrun{
-#' fped0910 <- get_fped("2009/2010", "both")
-#' diet0910 <- get_diet("2009/2010", "both")
-#' demo0910 <- get_demo("2009/2010")
-#' combo(fped0910,diet0910,demo0910)
-#'
-#' fped0506 <- get_fped("2005/2006", "first")
-#' diet0506 <- get_diet("2005/2006", "first")
-#' demo0506 <- get_demo("2005/2006")
-#' combo(fped0506,diet0506,demo0506, agethresh = 18)
-#' }
 
 combo <- function(fped, diet, demograph, agethresh = 2) {
 
@@ -38,7 +25,6 @@ combo <- function(fped, diet, demograph, agethresh = 2) {
     dat <- merge(dat, demograph, all.x = TRUE, by = "SEQN")
     dat <- subset(dat, dat$RIDAGEYR >= agethresh)
     dat <- subset(dat, dat$DRSTZ == 1)
-    # dat <- subset(dat, RIDAGEYR >=agethresh & DRSTZ == 1)
 
     dat$WHOLEFRT <- dat$T_F_CITMLB + dat$T_F_OTHER
     dat$MONOPOLY <- dat$TMFAT + dat$TPFAT

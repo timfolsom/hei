@@ -26,9 +26,10 @@ demo0910 <- get_demo("2009/2010")
 
 fped0910 <- get_fped("2009/2010", day = "both")
 
-alldat0910 <- combo(fped0910, diet0910, demo0910)
+# alldat0910 <- combo(fped0910, diet0910, demo0910)
 
-hei0910 <- hei(alldat0910)
+# hei0910 <- hei(alldat0910)
+hei0910 <- hei(diet0910,demo0910,fped0910)
 ```
 
 ## Analysis 1: BMI

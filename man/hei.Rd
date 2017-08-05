@@ -4,30 +4,34 @@
 \alias{hei}
 \title{Individual HEI scores calculation.}
 \usage{
-hei(dat)
+hei(fped, diet, demograph, agethresh = 2)
 }
 \arguments{
-\item{dat}{data to be scored}
+\item{fped}{Food Pattern Equivalent Database data; see \link{get_fped}}
+
+\item{diet}{dietary data from NHANES database; see \link{get_diet}}
+
+\item{demograph}{demographic data from NHANES database; see \link{get_demo}}
+
+\item{agethresh}{numeric threshold for age in years of survey participants to be included; defaults to 2 to exclude infants}
 }
 \value{
 Object of class \code{data.frame} containing all columns of input data set as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.
 }
 \description{
-\code{hei} takes a data set with columns of formatted dietary data (per \code{hei::combo}) and returns a data set with calculated total HEI scores for each individual along with scores for HEI constituent scoring categories.
+\code{hei} calculates a Health Eating Index (HEI) score for individuals in the National Health and Nutrition Examination Survey (NHANES) studies based on input dietary, demographic and Food Pattern Equivalent Database (FPED) data.
 }
 \examples{
 \dontrun{
 fped0910 <- get_fped("2009/2010", "both")
 diet0910 <- get_diet("2009/2010", "both")
 demo0910 <- get_demo("2009/2010")
-all0910 <- combo(fped0910,diet0910,demo0910)
-hei(all0910)
+hei(fped0910,diet0910,demo0910)
 
 fped0506 <- get_fped("2005/2006", "first")
 diet0506 <- get_diet("2005/2006", "first")
 demo0506 <- get_demo("2005/2006")
-all0506 <- combo(fped0506,diet0506,demo0506)
-hei(all0506)
+hei(fped0506,diet0506,demo0506, agethresh = 18)
 }
 }
 \references{
