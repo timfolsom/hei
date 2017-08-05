@@ -4,12 +4,12 @@
 \alias{get_diet}
 \title{NHANES dietary data retrieval.}
 \usage{
-get_diet(year, day = "both")
+get_diet(year, day)
 }
 \arguments{
 \item{year}{year combination of data set to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
 
-\item{day}{identifier for survey day to retrieve ... must be one of "first", "second" or "both" (default is set to "both")}
+\item{day}{identifier for survey day to retrieve ... must be one of "first", "second" or "both"}
 }
 \value{
 Object of class \code{data.frame} containing a modified NHANES dietary data set for a specified year and day. The complete NHANES dietary data set contains several more variables than are necessary for computing HEI scores. The data set returned by this function has been trimmed down to contain (in addition to an NHANES unique sequence identifier for each participant) only the columns of data needed for HEI score calculation, specifically:
