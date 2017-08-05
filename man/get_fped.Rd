@@ -4,7 +4,7 @@
 \alias{get_fped}
 \title{FPED data retrieval.}
 \usage{
-get_fped(year, day = "both")
+get_fped(year, day)
 }
 \arguments{
 \item{year}{year combination of data set to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
@@ -37,6 +37,6 @@ Object of class \code{tbl_df} containing a modified FPED data set for specified 
 \code{get_fped} returns an abridged Food Patterns Equivalents Database data set for a given year.
 }
 \examples{
-get_fped("2009/2010")
+get_fped("2009/2010", "both")
 get_fped("2009/2010", "first")
 }

@@ -33,7 +33,7 @@ library(dplyr)
 NHANES is conducted using a complex sampling method, such that each participant, based on certain demographic characteristics, is assigned a weighting variable that, when incorporated appropriately into the analysis allows conclusions to be drawn regarding the overall US population. As part of the extensive survey, a thorough dietary recall is taken, in which participants relate each food and drink item consumed in the previous 24-hour period, along with the amount. A follow-up phone call during which an identical dietary recall is conducted takes place several weeks later. Thus, except in cases where the participant could not be reached for follow-up or their recall was deemed unreliable, there are two day's worth of dietary data associated with each participant. The get_demo() and get_diet() functions each take two arguments, one specifying the survey year (e.g. "2009/2010") and another specifying the day (either "first", "second", or "both" with "both" being the default). These functions return data sets with key NHANES demographic and dietary variables, respectively.
 
 ```{r, echo=TRUE, results='hide'}
-diet0910 <- get_diet("2009/2010")
+diet0910 <- get_diet("2009/2010", day = "both")
 
 demo0910 <- get_demo("2009/2010")
 ```
@@ -46,7 +46,7 @@ Note: the FPED data sets available through this package were originally download
 
 
 ```{r, echo=TRUE, results='hide'}
-fped0910 <- get_fped("2009/2010")
+fped0910 <- get_fped("2009/2010", day = "both")
 ```
 
 ## Sealing the deal with the combo() and hei() fucntions

@@ -33,6 +33,6 @@ Object of class \code{data.frame} representing a data set fully prepped for HEI 
 \code{combo} returns a single data set combining the FPED and NHANES dietary and demographic data sets. Additionally, it allows for specification of an age threshold such that records with age values below this number will be excluded from the output. Furthermore, any rows for which dietary recall was deemed unreliable (DRSTZ != 1) are automatically dropped. Finally, additional necessary HEI inputs are generated from the existing columns, see "Value" section below.
 }
 \examples{
-combo(get_fped("2009/2010"), get_diet("2009/2010"), get_demo("2009/2010"))
-combo(get_fped("2009/2010"), get_diet("2009/2010"), get_demo("2009/2010"), 80)
+combo(get_fped("2009/2010", "both"), get_diet("2009/2010", "both"), get_demo("2009/2010"))
+combo(get_fped("2009/2010", "first"), get_diet("2009/2010","first"), get_demo("2009/2010"), 80)
 }

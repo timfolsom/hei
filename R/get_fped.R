@@ -3,7 +3,7 @@
 #' \code{get_fped} returns an abridged Food Patterns Equivalents Database data set for a given year.
 #'
 #' @param year year combination of data set to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"
-#' @param day identifier for FPED data to retrieve ... must be one of "first", "second" or "both" (default is set to "both")
+#' @param day identifier for FPED data to retrieve ... must be one of "first", "second" or "both"
 #' @return Object of class \code{tbl_df} containing a modified FPED data set for specified year and day. FPED proper contains several more variables than are necessary for computing HEI scores. The data set returned by this function has been trimmed down to contain (in addition to an NHANES unique sequence identifier for each participant, age, and dietary recall status) only the columns of data needed for HEI score calculation, specifically:
 #' \itemize{
 #' \item T_F_CITMLB: Intact fruits (whole or cut) of citrus, melons, and berries (cup eq.)
@@ -26,10 +26,10 @@
 #' }
 #' @export
 #' @examples
-#' get_fped("2009/2010")
+#' get_fped("2009/2010", "both")
 #' get_fped("2009/2010", "first")
 
-get_fped <- function(year, day = "both") {
+get_fped <- function(year, day) {
 
     yearchoices <- c("fped0506" = "2005/2006",
                      "fped0708"= "2007/2008",

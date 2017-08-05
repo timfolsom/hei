@@ -20,9 +20,9 @@ library(dplyr)
 We'll be using data for both days (which is the default).
 
 ```{r, echo=TRUE, results='hide'}
-diet0910 <- get_diet("2009/2010")
+diet0910 <- get_diet("2009/2010", day = "both")
 
-demo0910 <- get_demo("2009/2010")
+demo0910 <- get_demo("2009/2010", day = "both")
 
 fped0910 <- get_fped("2009/2010")
 
