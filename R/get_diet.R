@@ -1,9 +1,9 @@
 #' NHANES dietary data retrieval.
 #'
-#' \code{get_diet} returns an abridged National Health and Nutrition Examination Survey dietary data set for a given year.
+#' \code{get_diet} returns an abridged National Health and Nutrition Examination Survey (NHANES) dietary data set for a given year.
 #'
 #' @param year year combination of data set to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"
-#' @param day identifier for survey day to retrieve ... must be one of "first", "second" or "both"
+#' @param day identifier for survey day to retrieve ... must be "first" (data for study participants from first day), "second" (study participant data from second day) or "both" (data for study participants present in both days; values are average across the two days)
 #' @return Object of class \code{data.frame} containing a modified NHANES dietary data set for a specified year and day. The complete NHANES dietary data set contains several more variables than are necessary for computing HEI scores. The data set returned by this function has been trimmed down to contain (in addition to an NHANES unique sequence identifier for each participant) only the columns of data needed for HEI score calculation, specifically:
 #' \itemize{
 #' \item TKCAL: Energy (kcal)
@@ -97,5 +97,7 @@ get_diet <- function(year, day) {
         dat <- stats::aggregate(. ~ SEQN, data = dat, FUN = "mean")
 
     }
+
+    dat
 
 }

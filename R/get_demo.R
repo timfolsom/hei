@@ -32,4 +32,6 @@ get_demo <- function(year) {
     # have to convert each column to numeric to remove labelling from NHANES
     dat <- data.frame(apply(dat, 2, as.numeric))
 
+    dat
+
 }
