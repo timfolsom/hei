@@ -23,7 +23,7 @@ hei(fped, diet, demograph, agethresh = 2, verbose = FALSE)
 }}
 }
 \value{
-Object of class \code{data.frame} containing all columns of input data set as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.
+Object of class \code{data.frame}; defaults to only include columns for respondent identifier, age, and overall HEI score of each individual; this can be overidden with the \code{verbose} parameter to output all columns of the input data sets as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.
 }
 \description{
 \code{hei} calculates a Health Eating Index (HEI) score for individuals in the National Health and Nutrition Examination Survey (NHANES) studies based on input dietary, demographic and Food Pattern Equivalent Database (FPED) data.

@@ -12,7 +12,7 @@
 #' \item RIDAGEYR: Best age in years of the sample person at time of HH screening. Individuals 85 and over are topcoded at 85 years of age
 #' \item HEI: Overall Health Eating Index score for the given participant
 #' }
-#' @return Object of class \code{data.frame} containing all columns of input data set as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.
+#' @return Object of class \code{data.frame}; defaults to only include columns for respondent identifier, age, and overall HEI score of each individual; this can be overidden with the \code{verbose} parameter to output all columns of the input data sets as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.
 #' @export
 #'
 #' @references \url{https://www.cnpp.usda.gov/healthyeatingindex}
@@ -35,6 +35,7 @@ hei <- function(fped, diet, demograph, agethresh = 2, verbose = FALSE) {
     dat <- combo(fped, demograph, diet, agethresh)
 
     dat <- leg_all(dat)
+
     # heiveg
     # total veggies
     dat$vegden <- dat$lvtotal / (dat$TKCAL/1000)
