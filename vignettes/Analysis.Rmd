@@ -35,7 +35,7 @@ We will now conduct a linear regression analysis to examine the relationship bet
 
 ```{r, echo=TRUE}
 hei0910 <- hei0910 %>% 
-    select(SEQN, RIDAGEYR, heitotal)
+    select(SEQN, RIDAGEYR, HEI)
 ```
 
 Then, using the nhanesA package, pull down NHANES body measures data from the web. Select the relevant columns and filter out those rows that contain missing data.
@@ -56,7 +56,7 @@ heibmi0910 <- merge(hei0910, BMX_0910, by = "SEQN") %>%
 We can produce a scatter plot (using a function from the car package) visualizing the distributions of BMI and HEI scores as well as their relationship to each other.
 
 ```{r, echo=TRUE, message=TRUE}
-ggplot(heibmi0910, aes(heitotal, BMXBMI)) +
+ggplot(heibmi0910, aes(HEI, BMXBMI)) +
     geom_point(alpha = 0.25) +
     geom_smooth(method = "lm")
 ```
@@ -64,13 +64,13 @@ ggplot(heibmi0910, aes(heitotal, BMXBMI)) +
 The distribution of HEI scores appears to be normally distributed (an assumption of linear regression).
 
 ```{r, echo=TRUE, message=TRUE}
-hist(heibmi0910$heitotal)
+hist(heibmi0910$HEI)
 ```
 
 We see that HEI is a highly significant predictor of BMI, though the effect size is small.
 
 ```{r, echo=TRUE, message=TRUE}
-heibmi0910.lm <- lm(BMXBMI ~ heitotal, data=heibmi0910)
+heibmi0910.lm <- lm(BMXBMI ~ HEI, data=heibmi0910)
 summary(heibmi0910.lm)
 ```
 
@@ -81,7 +81,7 @@ This next example will analyze the relationship between HEI and food security. A
 
 ```{r, echo=TRUE}
 hei0910 <- hei0910 %>% 
-    select(SEQN, RIDAGEYR, heitotal)
+    select(SEQN, RIDAGEYR, HEI)
 ```
 
 Then, using the nhanesA package, pull down NHANES food security data from the web. Select the relevant columns and filter out those rows that contain missing data.
@@ -110,13 +110,13 @@ The average score for those in group 1 appears to be quite a bit higher than the
 ```{r, echo=TRUE, message=TRUE}
 heifsq0910 %>% 
     group_by(FSDAD) %>% 
-    summarise(mean(heitotal))
+    summarise(mean(HEI))
 ```
 
 We see that the difference between the secure group and each of the other groups is highly significant.
 
 ```{r, echo=TRUE, message=TRUE}
 heifsq0910$FSDAD <- relevel(factor(heifsq0910$FSDAD), ref="1")
-heifsq0910.lm <- lm(heitotal ~ FSDAD, data=heifsq0910)
+heifsq0910.lm <- lm(HEI ~ FSDAD, data=heifsq0910)
 summary(heifsq0910.lm)
 ```

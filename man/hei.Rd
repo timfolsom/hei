@@ -4,7 +4,7 @@
 \alias{hei}
 \title{Individual HEI scores calculation.}
 \usage{
-hei(fped, diet, demograph, agethresh = 2)
+hei(fped, diet, demograph, agethresh = 2, verbose = FALSE)
 }
 \arguments{
 \item{fped}{Food Pattern Equivalent Database data; see \link{get_fped}}
@@ -14,6 +14,13 @@ hei(fped, diet, demograph, agethresh = 2)
 \item{demograph}{demographic data from NHANES database; see \link{get_demo}}
 
 \item{agethresh}{numeric threshold for age in years of survey participants to be included; defaults to 2 to exclude infants}
+
+\item{verbose}{boolean indicating whether or not all columns from processed data should be output; default is \code{FALSE} designating only the following are included in the returned \code{data.frame}:
+\itemize{
+\item SEQN: Respondent sequence number
+\item RIDAGEYR: Best age in years of the sample person at time of HH screening. Individuals 85 and over are topcoded at 85 years of age
+\item HEI: Overall Health Eating Index score for the given participant
+}}
 }
 \value{
 Object of class \code{data.frame} containing all columns of input data set as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.

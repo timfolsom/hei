@@ -8,6 +8,6 @@ test_that("HEI score is same as original validation data", {
 
     heires <- hei(diet,fped,demog)
 
-    expect_equal_to_reference(heires$heitotal, file = "rds/valid.rds")
+    expect_equal_to_reference(heires$HEI, file = "rds/valid.rds")
 
 })
