@@ -30,3 +30,6 @@ all0506 <- combo(fped0506,diet0506,demo0506)
 hei(all0506)
 }
 }
+\references{
+\url{https://www.cnpp.usda.gov/healthyeatingindex}
+}

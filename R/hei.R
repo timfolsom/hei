@@ -5,6 +5,9 @@
 #' @param dat data to be scored
 #' @return Object of class \code{data.frame} containing all columns of input data set as well as 33 columns of calculated data related to HEI scoring and, significantly, a 70th column containing the total HEI score for each participant.
 #' @export
+#'
+#' @references \url{https://www.cnpp.usda.gov/healthyeatingindex}
+#'
 #' @examples
 #' \dontrun{
 #' fped0910 <- get_fped("2009/2010", "both")
