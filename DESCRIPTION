@@ -1,12 +1,13 @@
 Package: hei
 Type: Package
 Title: Calculate Healthy Eating Index (HEI) Scores
+Date: 2017-08-05
 Version: 0.1.0
-Author: c(person("Nagraj", "VP", email = "vpnagraj@virginia.edu", role =
-    c("aut", "cre")), person("Folsom", "Tim", email = "timothyjfolsom@gmail.com", role =
+Authors@R: c(person("VP", "Nagraj", email = "vpnagraj@virginia.edu", role =
+    c("aut", "cre")), person("Tim", "Folsom", email = "timothyjfolsom@gmail.com", role =
     c("aut")))
 Maintainer: VP Nagraj <vpnagraj@virginia.edu>
-Description: Calculates HEI scores for NHANES datasets to facilitate analysis of
+Description: Calculates Healthy Eating Index (HEI) scores for National Health and Nutrition Examination Survey (NHANES) data sets to facilitate analysis of
     demographic and dietary differences.
 License: GPL-3
 Encoding: UTF-8

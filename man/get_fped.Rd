@@ -40,7 +40,7 @@ Object of class \code{data.frame} containing a modified FPED data set for specif
 \item T_V_LEGUMES: Total dark green, red and orange, starchy, and other vegetables; excludes legumes (cup eq.)
 \item T_V_DRKGR: Dark green vegetables (cup eq.)
 \item T_F_TOTAL: Total intact fruits (whole or cut) and fruit juices (cup eq.)
-\item T_G_WHOLE: Grains defined as whole grains and contain the entire grain kernel ― the bran, germ, and endosperm (oz. eq.)
+\item T_G_WHOLE: Grains defined as whole grains and contain the entire grain kernel - the bran, germ, and endosperm (oz. eq.)
 \item T_D_TOTAL: Total milk, yogurt, cheese, and whey. For some foods, the total dairy values could be higher than the sum of D_MILK, D_YOGURT, and D_CHEESE because miscellaneous dairy component composed of whey is not included in FPED as a separate variable. (cup eq.)
 \item T_G_REFINED: Refined grains that do not contain all of the components of the entire grain kernel (oz. eq.)
 }

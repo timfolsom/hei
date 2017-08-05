@@ -17,7 +17,9 @@
 #' @references \url{https://www.cdc.gov/nchs/nhanes/nhanes_questionnaires.htm}
 #' @export
 #' @examples
+#' \dontrun{
 #' get_demo("2009/2010")
+#' }
 
 get_demo <- function(year) {
 

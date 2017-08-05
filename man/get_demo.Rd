@@ -26,7 +26,9 @@ Object of class \code{data.frame} containing a modified NHANES demographic data 
 \code{get_demo} returns an abridged National Health and Nutrition Examination Survey (NHANES) demographic data set for a given year.
 }
 \examples{
+\dontrun{
 get_demo("2009/2010")
+}
 }
 \references{
 \url{https://www.cdc.gov/nchs/nhanes/nhanes_questionnaires.htm}
