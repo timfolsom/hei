@@ -7,7 +7,14 @@
 get_demo(year)
 }
 \arguments{
-\item{year}{year combination of data set to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
+\item{year}{year combination of data set to retrieve ... must be one of the following:
+\itemize{
+\item "2005/2006"
+\item "2007/2008"
+\item "2009/2010"
+\item "2011/2012"
+\item "2013/2014"
+}}
 }
 \value{
 Object of class \code{data.frame} containing a modified NHANES demographic data set for a specified year. The complete NHANES demographic data set contains several more variables than are necessary for computing HEI scores. In fact, the only variable contained in the returned data set (in addition to an NHANES unique sequence identifier for each participant) is not, strictly speaking, even required itself, but becomes relevant if data sets from multiple separate NHANES iterations are concatenated, specifically:
@@ -16,7 +23,7 @@ Object of class \code{data.frame} containing a modified NHANES demographic data 
 }
 }
 \description{
-\code{get_demo} returns an abridged National Health and Nutrition Examination Survey demographic data set for a given year.
+\code{get_demo} returns an abridged National Health and Nutrition Examination Survey (NHANES) demographic data set for a given year.
 }
 \examples{
 get_demo("2009/2010")
