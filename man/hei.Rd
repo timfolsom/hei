@@ -13,7 +13,7 @@ hei(fped, diet, demograph, agethresh = 2, verbose = FALSE)
 
 \item{demograph}{demographic data from NHANES database; see \link{get_demo}}
 
-\item{agethresh}{numeric threshold for age in years of survey participants to be included; defaults to 2 to exclude infants}
+\item{agethresh}{numeric threshold for age in years of survey participants to be included; any individual less than the value specified will be excluded; defaults to 2}
 
 \item{verbose}{boolean indicating whether or not all columns from processed data should be output; default is \code{FALSE} designating only the following are included in the returned \code{data.frame}:
 \itemize{

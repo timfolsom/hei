@@ -5,7 +5,7 @@
 #' @param fped Food Pattern Equivalent Database data; see \link{get_fped}
 #' @param diet dietary data from NHANES database; see \link{get_diet}
 #' @param demograph demographic data from NHANES database; see \link{get_demo}
-#' @param agethresh numeric threshold for age in years of survey participants to be included; defaults to 2 to exclude infants
+#' @param agethresh numeric threshold for age in years of survey participants to be included; any individual less than the value specified will be excluded; defaults to 2
 #' @param verbose boolean indicating whether or not all columns from processed data should be output; default is \code{FALSE} designating only the following are included in the returned \code{data.frame}:
 #' \itemize{
 #' \item SEQN: Respondent sequence number
