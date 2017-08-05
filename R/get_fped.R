@@ -14,7 +14,7 @@
 #' \item T_PF_SEAFD_HI: Seafood (finfish, shellfish, and other seafood) high in n-3 fatty acids (oz. eq.)
 #' \item T_PF_SEAFD_LOW: Seafood (finfish, shellfish, and other seafood) low in n-3 fatty acids (oz. eq.)
 #' \item T_PF_NUTSDS: Peanuts, tree nuts, and seeds; excludes coconut (oz. eq.)
-#' \item T_SOLID_FATS: Fats naturally present in meat, poultry, eggs, and dairy (lard, tallow, and butter); hydrogenated or partially hydrogenated oils; shortening; palm, palm kernel and coconut oils; fat naturally present in coconut meat and cocoa butter; and 50% of fat present in stick and tub margarines and margarine spreads (grams)
+#' \item T_SOLID_FATS: Fats naturally present in meat, poultry, eggs, and dairy (lard, tallow, and butter); hydrogenated or partially hydrogenated oils; shortening; palm, palm kernel and coconut oils; fat naturally present in coconut meat and cocoa butter; and 50\% of fat present in stick and tub margarines and margarine spreads (grams)
 #' \item T_ADD_SUGARS: Foods defined as added sugars (tsp. eq.)
 #' \item T_V_TOTAL: Total dark green, red and orange, starchy, and other vegetables; excludes legumes (cup eq.)
 #' \item T_V_LEGUMES: Total dark green, red and orange, starchy, and other vegetables; excludes legumes (cup eq.)

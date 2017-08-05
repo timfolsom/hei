@@ -9,7 +9,7 @@ get_fped(year, day)
 \arguments{
 \item{year}{year combination of data set to retrieve must be one of "2005/2006", "2007/2008", "2009/2010", "2011/2012" or "2013/2014"}
 
-\item{day}{identifier for FPED data to retrieve ... must be one of "first", "second" or "both" (default is set to "both")}
+\item{day}{identifier for FPED data to retrieve ... must be one of "first", "second" or "both"}
 }
 \value{
 Object of class \code{tbl_df} containing a modified FPED data set for specified year and day. FPED proper contains several more variables than are necessary for computing HEI scores. The data set returned by this function has been trimmed down to contain (in addition to an NHANES unique sequence identifier for each participant, age, and dietary recall status) only the columns of data needed for HEI score calculation, specifically:
@@ -22,7 +22,7 @@ Object of class \code{tbl_df} containing a modified FPED data set for specified 
 \item T_PF_SEAFD_HI: Seafood (finfish, shellfish, and other seafood) high in n-3 fatty acids (oz. eq.)
 \item T_PF_SEAFD_LOW: Seafood (finfish, shellfish, and other seafood) low in n-3 fatty acids (oz. eq.)
 \item T_PF_NUTSDS: Peanuts, tree nuts, and seeds; excludes coconut (oz. eq.)
-\item T_SOLID_FATS: Fats naturally present in meat, poultry, eggs, and dairy (lard, tallow, and butter); hydrogenated or partially hydrogenated oils; shortening; palm, palm kernel and coconut oils; fat naturally present in coconut meat and cocoa butter; and 50% of fat present in stick and tub margarines and margarine spreads (grams)
+\item T_SOLID_FATS: Fats naturally present in meat, poultry, eggs, and dairy (lard, tallow, and butter); hydrogenated or partially hydrogenated oils; shortening; palm, palm kernel and coconut oils; fat naturally present in coconut meat and cocoa butter; and 50\% of fat present in stick and tub margarines and margarine spreads (grams)
 \item T_ADD_SUGARS: Foods defined as added sugars (tsp. eq.)
 \item T_V_TOTAL: Total dark green, red and orange, starchy, and other vegetables; excludes legumes (cup eq.)
 \item T_V_LEGUMES: Total dark green, red and orange, starchy, and other vegetables; excludes legumes (cup eq.)
