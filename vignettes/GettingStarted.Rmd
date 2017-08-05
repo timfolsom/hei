@@ -49,16 +49,13 @@ Note: the FPED data sets available through this package were originally download
 fped0910 <- get_fped("2009/2010", day = "both")
 ```
 
-## Sealing the deal with the combo() and hei() fucntions
+## Sealing the deal with the hei() function
 
-The combo() function takes as its arguments three data sets: an FPED data set, a NHANES dietary data set, and an NHANES demographic data set. In other words, combo() simply takes as its arguments the outputs of the first three functions and outputs a single data set containing all the variables necessary to calculate HEI scores from as well as key demographic data. The hei() function, the culmination of this process, takes a dietary data set and outputs a data set with an additional column containing an HEI score for each participant.
+The hei() function takes as its arguments three data sets: an FPED data set, a NHANES dietary data set, and an NHANES demographic data set. In other words, hei() simply takes as its arguments the outputs of the first three functions and outputs a single data set containing all the variables necessary to calculate HEI scores, key demographic data as well as an HEI score for each participant.
 
 This data set can then be used in any number of analyses relating to diet and other outcomes. As it retains the unique NHANES identifying variable, it can be joined with any other NHANES data set to gain access to a host of other variables which may be of interest. An example of how to do this is provided in a second vignette.
 
 ```{r, echo=TRUE, results='hide'}
-# alldat0910 <- combo(fped0910, diet0910, demo0910)
-# 
-# hei0910 <- hei(alldat0910)
 hei0910 <- hei(diet0910,demo0910,fped0910)
 ```
 
