@@ -30,7 +30,7 @@ library(dplyr)
 
 ## NHANES and the get_demo()/get_diet() functions
 
-NHANES is conducted using a complex sampling method, such that each participant, based on certain demographic characteristics, is assigned a weighting variable that, when incorporated appropriately into the analysis allows conclusions to be drawn regarding the overall US population. As part of the extensive survey, a thorough dietary recall is taken, in which participants relate each food and drink item consumed in the previous 24-hour period, along with the amount. A follow-up phone call during which an identical dietary recall is conducted takes place several weeks later. Thus, except in cases where the participant could not be reached for follow-up or their recall was deemed unreliable, there are two day's worth of dietary data associated with each participant. The get_demo() and get_diet() functions each take two arguments, one specifying the survey year (e.g. "2009/2010") and another specifying the day (either "first", "second", or "both" with "both" being the default). These functions return data sets with key NHANES demographic and dietary variables, respectively.
+NHANES is conducted using a complex sampling method, such that each participant, based on certain demographic characteristics, is assigned a weighting variable that, when incorporated appropriately into the analysis allows conclusions to be drawn regarding the overall US population. As part of the extensive survey, a thorough dietary recall is taken, in which participants relate each food and drink item consumed in the previous 24-hour period, along with the amount. A follow-up phone call during which an identical dietary recall is conducted takes place several weeks later. Thus, except in cases where the participant could not be reached for follow-up or their recall was deemed unreliable, there are two days' worth of dietary data associated with each participant. The get_demo() and get_diet() functions each take two arguments, one specifying the survey year (e.g. "2009/2010") and another specifying the day (either "first", "second", or "both"). These functions return data sets with key NHANES demographic and dietary variables, respectively.
 
 ```{r, echo=TRUE, results='hide'}
 diet0910 <- get_diet("2009/2010", day = "both")
@@ -56,7 +56,7 @@ The hei() function takes as its arguments three data sets: an FPED data set, a N
 This data set can then be used in any number of analyses relating to diet and other outcomes. As it retains the unique NHANES identifying variable, it can be joined with any other NHANES data set to gain access to a host of other variables which may be of interest. An example of how to do this is provided in a second vignette.
 
 ```{r, echo=TRUE, results='hide'}
-hei0910 <- hei(diet0910,demo0910,fped0910)
+hei0910 <- hei(fped0910,diet0910,demo0910)
 ```
 
 ```{r, echo=TRUE, message=TRUE}
