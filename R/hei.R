@@ -32,7 +32,7 @@
 
 hei <- function(fped, diet, demograph, agethresh = 2, verbose = FALSE) {
 
-    dat <- combo(fped, demograph, diet, agethresh)
+    dat <- combo(fped, diet, demograph, agethresh)
 
     dat <- leg_all(dat)
 
