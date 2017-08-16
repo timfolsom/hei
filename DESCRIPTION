@@ -8,7 +8,7 @@ Authors@R: c(person("VP", "Nagraj", email = "vpnagraj@virginia.edu", role =
     c("aut", "cre")))
 Maintainer: Tim Folsom <timothyjfolsom@gmail.com>
 Description: Calculates Healthy Eating Index (HEI) scores for National Health and Nutrition Examination Survey (NHANES) data sets to facilitate analysis of
-    demographic and dietary differences.
+    demographic and dietary differences. For more information on the HEI metric, refer to Guenther et al. (2014) <doi:10.3945/jn.113.183079>.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
