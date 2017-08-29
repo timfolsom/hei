@@ -2,7 +2,7 @@
 title: 'hei: Calculate Healthy Eating Index (HEI) Scores'
 authors:
  - name: Tim Folsom
-   orcid: x
+   orcid: 0000-0002-8647-5810
    affiliation: University of Virginia
  - name: VP Nagraj
    orcid: 0000-0003-0060-566X
