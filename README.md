@@ -1,8 +1,8 @@
 ## HEI
 
-[![Travis-CI Build Status](https://travis-ci.org/vpnagraj/hei.svg?branch=master)](https://travis-ci.org/vpnagraj/hei)
+[![Travis-CI Build Status](https://travis-ci.org/timfolsom/hei.svg?branch=master)](https://travis-ci.org/timfolsom/hei)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/hei)](https://cran.r-project.org/package=hei)
-[![codecov](https://codecov.io/gh/vpnagraj/hei/branch/master/graph/badge.svg)](https://codecov.io/gh/vpnagraj/hei)
+[![codecov](https://codecov.io/gh/timfolsom/hei/branch/master/graph/badge.svg)](https://codecov.io/gh/timfolsom/hei)
 [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/hei)](https://cran.r-project.org/package=hei)
 
 ___
