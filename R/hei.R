@@ -149,11 +149,11 @@ hei <- function(fped, diet, demograph, agethresh = 2, verbose = FALSE) {
                             20,
                             dat$heisofaas)
 
-    dat$heisofaas = ifelse(is.na(dat$heisofaas),
+    dat$heisofaas <- ifelse(is.na(dat$heisofaas),
                            20 - (20*(dat$sofa_perc-19)/(50-19)),
                            dat$heisofaas)
 
-    dat$HEI = dat$heiveg + dat$heibngrn + dat$heitotfrt + dat$heiwholefrt + dat$heiwholegrain + dat$heidairy + dat$heitotpro + dat$heiseaplantpro + dat$heifattyacid + dat$heirefgrain + dat$heisofaas + dat$heisodi
+    dat$HEI <- dat$heiveg + dat$heibngrn + dat$heitotfrt + dat$heiwholefrt + dat$heiwholegrain + dat$heidairy + dat$heitotpro + dat$heiseaplantpro + dat$heifattyacid + dat$heirefgrain + dat$heisofaas + dat$heisodi
 
     if (verbose) {
 

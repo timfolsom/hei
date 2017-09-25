@@ -32,7 +32,7 @@ combo <- function(fped, diet, demograph, agethresh = 2) {
     dat$SEAPLANT <- dat$T_PF_SEAFD_HI + dat$T_PF_SEAFD_LOW + dat$T_PF_NUTSDS + dat$T_PF_SOY
     dat$ADDSUGC <- 16*dat$T_ADD_SUGARS
     dat$SOLFATC <- 9*dat$T_SOLID_FATS
-    dat$MAXALCGR = 13 *(dat$TKCAL/1000)
+    dat$MAXALCGR <- 13 *(dat$TKCAL/1000)
     dat$EXALCCAL <- ifelse(dat$TALCO <= dat$MAXALCGR, 0, 7*(dat$TALCO-dat$MAXALCGR))
     dat$EMPTYCAL10 <- dat$ADDSUGC + dat$SOLFATC + dat$EXALCCAL
 
