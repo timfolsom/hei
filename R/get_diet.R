@@ -73,7 +73,10 @@ get_diet <- function(year, day) {
 
     } else {
 
-        dbname1 <- paste0(names(daychoices[1]), "TOT_", names(which(yearchoices==year)))
+        dbname1 <- paste0(names(daychoices[1]),
+                          "TOT_",
+                          names(which(yearchoices==year))
+                          )
 
         dat1 <- nhanesA::nhanes(dbname1)
 
@@ -89,7 +92,10 @@ get_diet <- function(year, day) {
 
         dat1 <- dat1[,names(dat1) %in% keepers]
 
-        dbname2 <- paste0(names(daychoices[2]), "TOT_", names(which(yearchoices==year)))
+        dbname2 <- paste0(names(daychoices[2]),
+                          "TOT_",
+                          names(which(yearchoices==year))
+                          )
 
         dat2 <- nhanesA::nhanes(dbname2)
 
