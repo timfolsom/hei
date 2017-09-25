@@ -16,13 +16,13 @@ ___
 **hei** is available on [CRAN](https://cran.r-project.org/package=hei), and can be installed as follows:
 
 ```
-install.pacakges("hei")
+install.packages("hei")
 ```
 
 To install the development version hosted on this repository, use the **devtools** package and the following:
 
 ```
-# install.pacakges("devtools")
+# install.packages("devtools")
 devtools::install_github("timfolsom/hei")
 ```
 ### Getting Started
