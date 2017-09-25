@@ -13,7 +13,7 @@ The goal of **hei** is to calculate Healthy Eating Index (HEI) scores from Natio
 ### Installation
 ___
 
-**hei** is available on [CRAN]((https://cran.r-project.org/package=hei), and can be installed as follows:
+**hei** is available on [CRAN](https://cran.r-project.org/package=hei), and can be installed as follows:
 
 ```
 install.pacakges("hei")
