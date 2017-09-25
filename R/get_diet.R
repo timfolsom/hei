@@ -42,11 +42,15 @@ get_diet <- function(year, day) {
                      "G"= "2011/2012",
                      "H" = "2013/2014")
 
-    try(if(!year %in% yearchoices) stop("must use valid year choice"))
+    try(if(!year %in% yearchoices)
+        stop("must use valid year choice, see ?get_diet for valid choices",
+             call. = FALSE))
 
     daychoices <- c("DR1"="first", "DR2"="second","both")
 
-    try(if(!day %in% daychoices) stop("must use valid day choice"))
+    try(if(!day %in% daychoices)
+        stop("must use valid day choice, see ?get_diet for valid choices",
+             call. = FALSE))
 
     if(day != "both") {
 

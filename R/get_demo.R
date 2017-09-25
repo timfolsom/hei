@@ -29,7 +29,9 @@ get_demo <- function(year) {
                      "G" = "2011/2012",
                      "H" = "2013/2014")
 
-    try(if(!year %in% yearchoices) stop("must use valid year choice"))
+    try(if(!year %in% yearchoices)
+        stop("must use valid year choice, see ?get_demo for valid choices",
+             call. = FALSE))
 
     dbname <- paste0("DEMO_", names(which(yearchoices==year)))
 

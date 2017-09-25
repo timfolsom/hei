@@ -54,9 +54,13 @@ get_fped <- function(year, day) {
                     "day1" = "first",
                     "day2" = "second")
 
-    try(if(!year %in% yearchoices) stop("must use valid year choice"))
+    try(if(!year %in% yearchoices)
+        stop("must use valid year choice, see ?get_fped for valid choices",
+             call. = FALSE))
 
-    try(if(!day %in% daychoices) stop("must use valid day choice"))
+    try(if(!day %in% daychoices)
+        stop("must use valid day choice, see ?get_fped for valid choices",
+             call. = FALSE))
 
     fped <- paste0(names(which(yearchoices==year)),
                    "_",
