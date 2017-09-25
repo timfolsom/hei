@@ -9,14 +9,27 @@ ___
 ### Overview
 ___
 The goal of **hei** is to calculate Healthy Eating Index (HEI) scores from National Health and Nutrition Examination Survey (NHANES) data for use in dietary analyses. The HEI is a dietary metric designed by the USDA and NCI to gauge adherence to the US Dietary Guidelines.
+
 ### Installation
 ___
+
+**hei** is available on [CRAN]((https://cran.r-project.org/package=hei), and can be installed as follows:
+
 ```
+install.pacakges("hei")
+```
+
+To install the development version hosted on this repository, use the **devtools** package and the following:
+
+```
+# install.pacakges("devtools")
 devtools::install_github("timfolsom/hei")
 ```
 ### Getting Started
 ___
->`library(hei)`
+```
+library(hei)
+```
 
 The **hei** package contains one key function:
 
