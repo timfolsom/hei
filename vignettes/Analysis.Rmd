@@ -89,7 +89,7 @@ hei0910 <- hei0910 %>%
     select(SEQN, RIDAGEYR, HEI)
 ```
 
-Then, using the nhanesA package, pull down NHANES food security data from the web. Select the relevant columns and filter out those rows that contain missing data.
+Then, using the nhanesA package, pull down [NHANES food security data](https://wwwn.cdc.gov/nchs/nhanes/2009-2010/FSQ_F.htm) from the web. This data includes an ["Adult food security category" (FSDAD)](https://wwwn.cdc.gov/nchs/nhanes/2009-2010/FSQ_F.htm#FSDAD), which we will use for the analysis. Select the relevant columns and filter out those rows that contain missing data.
 
 ```{r, echo=TRUE, results='hide'}
 FSQ_0910 <- nhanesA::nhanes('FSQ_F') %>%
