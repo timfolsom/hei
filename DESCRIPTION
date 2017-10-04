@@ -21,5 +21,5 @@ Suggests: knitr,
     dplyr,
     ggplot2
 VignetteBuilder: knitr
-URL: https://cran.r-project.org/package=hei
+URL: https://timfolsom.github.io/hei/
 BugReports: https://github.com/timfolsom/hei/issues
