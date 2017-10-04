@@ -4,6 +4,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/hei)](https://cran.r-project.org/package=hei)
 [![codecov](https://codecov.io/gh/timfolsom/hei/branch/master/graph/badge.svg)](https://codecov.io/gh/timfolsom/hei)
 [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/hei)](https://cran.r-project.org/package=hei)
+[![JOSS Publication](http://joss.theoj.org/papers/10.21105/joss.00417/status.svg)](http://dx.doi.org/10.21105/joss.00417)
 
 ___
 ### Overview
