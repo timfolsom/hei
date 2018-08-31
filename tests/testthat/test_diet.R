@@ -6,6 +6,8 @@ diet3 <- get_diet("2009/2010", day = "both")
 
 test_that("get_diet returns data frames", {
 
+    skip_on_cran()
+
     expect_is(diet1, "data.frame")
     expect_is(diet2, "data.frame")
     expect_is(diet3, "data.frame")
