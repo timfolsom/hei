@@ -1,7 +1,7 @@
 Package: hei
 Type: Package
 Title: Calculate Healthy Eating Index (HEI) Scores
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(person("VP", "Nagraj", email = "vpnagraj@virginia.edu", role =
     c("aut")), person("Tim", "Folsom", email = "timothyjfolsom@gmail.com", role =
     c("aut", "cre")))
